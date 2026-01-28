@@ -4,236 +4,722 @@
   <meta charset="UTF-8" />
   <title>Intranet – Mission Locale Pays Basque</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <style>
-    :root {
-      --orange: #f39200;      /* Orientation */
-      --blue: #2897d5;        /* Emploi */
-      --green: #95c11f;       /* Formation */
-      --purple: #7b4fa3;      /* Mobilité */
-      --red: #e74c3c;         /* Santé */
-      --yellow: #f1c40f;      /* Vie quotidienne */
-      --teal: #1abc9c;        /* Citoyenneté / Numérique */
-      --dark: #2b2b2b;
-      --light: #f7f7f7;
+    :root{
+      --ml-orange:#f39200;
+      --ml-blue:#2897d5;
+      --ml-green:#95c11f;
+      --ml-purple:#7b4fa3;
+      --ml-red:#e74c3c;
+      --ml-yellow:#f1c40f;
+      --ml-teal:#1abc9c;
+      --dark:#2b2b2b;
+      --light:#f7f7f7;
+      --card:#ffffff;
+      --muted:#6b7280;
     }
 
-    body {
-      margin: 0;
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
       font-family: Inter, Arial, sans-serif;
-      background: var(--light);
-      color: var(--dark);
+      background:var(--light);
+      color:var(--dark);
     }
 
-    header {
-      background: white;
-      border-bottom: 5px solid var(--orange);
-      padding: 1.2rem 2rem;
+    header{
+      background:var(--card);
+      border-bottom:5px solid var(--ml-orange);
+      padding: 1.1rem 1.6rem;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 1.5rem;
+    .header-row{
+      display:flex;
+      align-items:center;
+      gap:1rem;
     }
 
-    .container {
-      padding: 2rem;
-      max-width: 1300px;
-      margin: auto;
+    .header-row img{
+      height:46px;
+      width:auto;
+      display:block;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
+    header h1{
+      margin:0;
+      font-size:1.35rem;
+      letter-spacing:0.2px;
     }
 
-    .block {
-      background: white;
-      border-radius: 18px;
-      padding: 1.5rem;
+    .container{
+      padding: 1.8rem;
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .block{
+      background:var(--card);
+      border-radius:18px;
+      padding: 1.2rem 1.2rem 1rem;
       box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-      transition: all 0.2s ease;
+      transition: transform .18s ease, box-shadow .18s ease;
     }
 
-    .block:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+    .block:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.12);
     }
 
-    .block h2 {
-      margin-top: 0;
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
+    .block-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:0.75rem;
+      margin-bottom: 0.9rem;
     }
 
-    .subblocks {
-      display: grid;
+    .block h2{
+      margin:0;
+      font-size:1.08rem;
+      line-height:1.2;
+    }
+
+    .block-meta{
+      font-size:0.82rem;
+      color:var(--muted);
+      margin-top:0.25rem;
+    }
+
+    .subblocks{
+      display:grid;
       gap: 0.6rem;
     }
 
-    .subblock {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .subblock{
       background: var(--light);
-      padding: 0.7rem 0.9rem;
-      border-radius: 10px;
-      font-size: 0.9rem;
-      cursor: pointer;
+      border-radius: 12px;
+      padding: 0.65rem 0.75rem;
       transition: background 0.2s ease;
+      border: 1px solid rgba(0,0,0,0.04);
     }
 
-    .subblock:hover {
-      background: rgba(0,0,0,0.05);
+    .subblock:hover{ background: rgba(0,0,0,0.045); }
+
+    .subrow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 0.7rem;
     }
 
-    .actions {
-      display: flex;
-      gap: 0.4rem;
+    .label{
+      font-size:0.92rem;
+      font-weight:600;
+      line-height:1.2;
     }
 
-    .action-btn {
+    .actions{
+      display:flex;
+      align-items:center;
+      gap: 0.35rem;
+      flex-shrink:0;
+    }
+
+    .btn{
       border: none;
-      background: white;
-      border-radius: 6px;
-      padding: 0.2rem 0.45rem;
-      font-size: 0.75rem;
+      background: #fff;
+      border-radius: 8px;
+      padding: 0.25rem 0.45rem;
+      font-size: 0.78rem;
       cursor: pointer;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+      transition: transform .12s ease;
+      line-height:1;
     }
 
-    .action-btn.add { color: #2ecc71; }
-    .action-btn.remove { color: #e74c3c; }
-      background: rgba(0,0,0,0.05);
+    .btn:active{ transform: scale(0.97); }
+    .btn.add{ color:#16a34a; }
+    .btn.del{ color:#dc2626; }
+    .btn.small{ font-size:0.74rem; padding:0.22rem 0.40rem; }
+
+    .resources{
+      margin: 0.55rem 0 0;
+      padding: 0;
+      list-style: none;
+      display:grid;
+      gap: 0.35rem;
     }
 
-    footer {
-      margin-top: 3rem;
-      padding: 1rem 2rem;
-      font-size: 0.85rem;
-      text-align: center;
-      color: #666;
+    .resources li{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:0.6rem;
+      background:#fff;
+      border-radius:10px;
+      padding:0.45rem 0.55rem;
+      border:1px solid rgba(0,0,0,0.05);
     }
 
-    /* Couleurs par bloc */
-    .orientation h2 { color: var(--orange); }
-    .emploi h2 { color: var(--blue); }
-    .formation h2 { color: var(--green); }
-    .mobilite h2 { color: var(--purple); }
-    .quotidien h2 { color: var(--yellow); }
-    .sante h2 { color: var(--red); }
-    .citoyennete h2 { color: var(--teal); }
+    .resources a{
+      color: var(--dark);
+      text-decoration: none;
+      font-size:0.88rem;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 210px;
+    }
+
+    .resources a:hover{ text-decoration: underline; }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:0.35rem;
+      font-size:0.78rem;
+      color: var(--muted);
+      background: rgba(0,0,0,0.04);
+      border-radius: 999px;
+      padding: 0.25rem 0.55rem;
+      white-space: nowrap;
+    }
+
+    footer{
+      margin-top: 2.2rem;
+      padding: 1rem 1.6rem;
+      text-align:center;
+      color:#666;
+      font-size:0.85rem;
+    }
+
+    /* Couleurs par bloc (une couleur = un bloc) */
+    .c-orange h2 { color: var(--ml-orange); }
+    .c-blue h2 { color: var(--ml-blue); }
+    .c-green h2 { color: var(--ml-green); }
+    .c-purple h2 { color: var(--ml-purple); }
+    .c-red h2 { color: var(--ml-red); }
+    .c-yellow h2 { color: var(--ml-yellow); }
+    .c-teal h2 { color: var(--ml-teal); }
   </style>
 </head>
+
 <body>
 
 <header>
-  <div style="display:flex; align-items:center; gap:1.5rem;">
-    <img src="https://static.wixstatic.com/media/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif/v1/fill/w_224,h_60,al_c,q_80,enc_avif,quality_auto/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif" alt="Logo Mission Locale Pays Basque" style="height:48px;" />
-    <h1 style="margin:0;">Intranet – Mission Locale Pays Basque</h1>
+  <div class="header-row">
+    <img
+      src="https://static.wixstatic.com/media/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif/v1/fill/w_224,h_60,al_c,q_80,enc_avif,quality_auto/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif"
+      alt="Logo Mission Locale Pays Basque"
+    />
+    <div>
+      <h1>Intranet – Mission Locale Pays Basque</h1>
+      <div class="block-meta">Prototype agile : ajouter/supprimer des rubriques et des ressources par bloc.</div>
+    </div>
   </div>
 </header>
 
 <div class="container">
+  <div class="grid" id="grid">
 
-  <div class="grid">
+    <!-- ACTUALITÉS INTERNES -->
+    <section class="block c-blue" data-block="actualites">
+      <div class="block-head">
+        <div>
+          <h2>Actualités internes</h2>
+          <div class="block-meta">Infos Direction • Événements • Notes</div>
+        </div>
+        <div class="actions">
+          <span class="pill">Rubrique</span>
+          <button class="btn add" data-action="add-subblock" title="Ajouter une rubrique">＋</button>
+        </div>
+      </div>
 
-    <div class="block">
-      <h2>Actualités internes</h2>
       <div class="subblocks">
-        <div class="subblock"><span class="label">TODO</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span class="label">TODO</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span class="label">TODO</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-      </div>
-    </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Infos Direction & CODIR</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource" title="Ajouter une ressource">＋</button>
+              <button class="btn del small" data-action="delete-subblock" title="Supprimer la rubrique">×</button>
+            </span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
 
-    <div class="block">
-      <h2>Institution & gouvernance</h2>
-      <div class="subblocks">
-        <div class="subblock"><span class="label">TODO</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-      </div>
-    </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Événements internes</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource">＋</button>
+              <button class="btn del small" data-action="delete-subblock">×</button>
+            </span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
 
-    <div class="block">
-      <h2>Accueil & accompagnement</h2>
-      <div class="subblocks">
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Notes internes</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource">＋</button>
+              <button class="btn del small" data-action="delete-subblock">×</button>
+            </span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="block orientation">
-      <h2>Ressources thématiques</h2>
-      <div class="subblocks">
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
+    <!-- INSTITUTION & GOUVERNANCE -->
+    <section class="block c-orange" data-block="institution">
+      <div class="block-head">
+        <div>
+          <h2>Institution & gouvernance</h2>
+          <div class="block-meta">CCN • RH • Réseau ARML/UNML</div>
+        </div>
+        <div class="actions">
+          <span class="pill">Rubrique</span>
+          <button class="btn add" data-action="add-subblock">＋</button>
+        </div>
       </div>
-    </div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-      </div>
-    </div>
 
-    <div class="block">
-      <h2>Territoires</h2>
       <div class="subblocks">
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-      </div>
-    </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Projet associatif & gouvernance</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource">＋</button>
+              <button class="btn del small" data-action="delete-subblock">×</button>
+            </span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
 
-    <div class="block">
-      <h2>Outils quotidiens</h2>
-      <div class="subblocks">
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-      </div>
-    </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Convention Collective (CCN)</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource">＋</button>
+              <button class="btn del small" data-action="delete-subblock">×</button>
+            </span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
 
-    <div class="block">
-      <h2>Formation & professionnalisation</h2>
-      <div class="subblocks">
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-      </div>
-    </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Espace RH & vie du salarié</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource">＋</button>
+              <button class="btn del small" data-action="delete-subblock">×</button>
+            </span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
 
-    <div class="block">
-      <h2>Projets structurants</h2>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Réseau ARML & UNML</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource">＋</button>
+              <button class="btn del small" data-action="delete-subblock">×</button>
+            </span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACCUEIL & ACCOMPAGNEMENT -->
+    <section class="block c-green" data-block="accueil">
+      <div class="block-head">
+        <div>
+          <h2>Accueil & accompagnement</h2>
+          <div class="block-meta">Process cœur de métier</div>
+        </div>
+        <div class="actions">
+          <span class="pill">Process</span>
+          <button class="btn add" data-action="add-subblock">＋</button>
+        </div>
+      </div>
+
       <div class="subblocks">
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Process – Premier accueil</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource">＋</button>
+              <button class="btn del small" data-action="delete-subblock">×</button>
+            </span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
+
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Process – Diagnostic</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource">＋</button>
+              <button class="btn del small" data-action="delete-subblock">×</button>
+            </span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
+
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Process – Dispositifs</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource">＋</button>
+              <button class="btn del small" data-action="delete-subblock">×</button>
+            </span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
+
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Process – Ateliers collectifs</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource">＋</button>
+              <button class="btn del small" data-action="delete-subblock">×</button>
+            </span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
       </div>
-    </div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
-        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
+    </section>
+
+    <!-- RESSOURCES THÉMATIQUES -->
+    <section class="block c-purple" data-block="thematiques">
+      <div class="block-head">
+        <div>
+          <h2>Ressources thématiques</h2>
+          <div class="block-meta">7 univers (calque site public) – contenus internes</div>
+        </div>
+        <div class="actions">
+          <span class="pill">Rubrique</span>
+          <button class="btn add" data-action="add-subblock">＋</button>
+        </div>
       </div>
-    </div>
+
+      <div class="subblocks">
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Orientation</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Emploi</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Formation</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Se déplacer / Partir à l’étranger</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Démarches & vie quotidienne</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Santé</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Citoyenneté & numérique</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TERRITOIRES -->
+    <section class="block c-yellow" data-block="territoires">
+      <div class="block-head">
+        <div>
+          <h2>Territoires</h2>
+          <div class="block-meta">BAB Nord • BAB Sud • Sud PB • PBI</div>
+        </div>
+        <div class="actions">
+          <span class="pill">Territoire</span>
+          <button class="btn add" data-action="add-subblock">＋</button>
+        </div>
+      </div>
+
+      <div class="subblocks">
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">BAB Nord</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">BAB Sud</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Sud Pays Basque</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Pays Basque Intérieur</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUTILS QUOTIDIENS -->
+    <section class="block c-teal" data-block="outils">
+      <div class="block-head">
+        <div>
+          <h2>Outils quotidiens</h2>
+          <div class="block-meta">Accès rapide aux outils de travail</div>
+        </div>
+        <div class="actions">
+          <span class="pill">Outil</span>
+          <button class="btn add" data-action="add-subblock">＋</button>
+        </div>
+      </div>
+
+      <div class="subblocks">
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">i-Milo</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">linscription</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Agenda partagé</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMATION & PROFESSIONNALISATION -->
+    <section class="block c-red" data-block="formationpro">
+      <div class="block-head">
+        <div>
+          <h2>Formation & professionnalisation</h2>
+          <div class="block-meta">Montée en compétences & ressources</div>
+        </div>
+        <div class="actions">
+          <span class="pill">Rubrique</span>
+          <button class="btn add" data-action="add-subblock">＋</button>
+        </div>
+      </div>
+
+      <div class="subblocks">
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Formations internes</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">MOOCs & e-learning</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Ressources pédagogiques</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
+          </div>
+          <ul class="resources"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJETS STRUCTURANTS -->
+    <section class="block c-green" data-block="projets">
+      <div class="block-head">
+        <div>
+          <h2>Projets structurants</h2>
+          <div class="block-meta">ERIP • BETI LAN • Europe • Transfrontalier</div>
+        </div>
+        <div class="actions">
+          <span class="pill">Projet</span>
+          <button class="btn add" data-action="add-subblock">＋</button>
+        </div>
+      </div>
+
+      <div class="subblocks">
+        <div class="subblock" data-subblock>
+          <div class="subrow"><span class="label">ERIP</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow"><span class="label">BETI LAN</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow"><span class="label">Projets européens</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow"><span class="label">Transfrontalier</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div>
+          <ul class="resources"></ul>
+        </div>
+      </div>
+    </section>
 
   </div>
 </div>
 
-<footer>
-  © Mission Locale Pays Basque – Intranet interne
-</footer>
+<footer>© Mission Locale Pays Basque – Intranet interne</footer>
+
+<script>
+  // Prototype « agile » :
+  // - + sur un bloc : ajoute une rubrique (subblock)
+  // - + sur une rubrique : ajoute une ressource (lien)
+  // - × sur une rubrique : supprime la rubrique
+  // - × sur une ressource : supprime la ressource
+
+  function createSubblock(labelText){
+    const wrap = document.createElement('div');
+    wrap.className = 'subblock';
+    wrap.setAttribute('data-subblock','');
+
+    wrap.innerHTML = `
+      <div class="subrow">
+        <span class="label"></span>
+        <span class="actions">
+          <button class="btn add small" data-action="add-resource" title="Ajouter une ressource">＋</button>
+          <button class="btn del small" data-action="delete-subblock" title="Supprimer la rubrique">×</button>
+        </span>
+      </div>
+      <ul class="resources"></ul>
+    `;
+
+    wrap.querySelector('.label').textContent = labelText;
+    return wrap;
+  }
+
+  function createResourceItem(title, url){
+    const li = document.createElement('li');
+    const safeUrl = url?.trim() || '#';
+
+    li.innerHTML = `
+      <a href="${safeUrl}" target="_blank" rel="noopener noreferrer"></a>
+      <span class="actions">
+        <button class="btn del small" data-action="delete-resource" title="Supprimer la ressource">×</button>
+      </span>
+    `;
+
+    const a = li.querySelector('a');
+    a.textContent = title?.trim() || 'Ressource';
+    a.href = safeUrl;
+
+    return li;
+  }
+
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-action]');
+    if(!btn) return;
+
+    const action = btn.getAttribute('data-action');
+
+    // Ajouter une rubrique (au niveau bloc)
+    if(action === 'add-subblock'){
+      const block = btn.closest('.block');
+      if(!block) return;
+      const container = block.querySelector('.subblocks');
+      const label = window.prompt('Nom de la nouvelle rubrique :');
+      if(!label || !label.trim()) return;
+      container.appendChild(createSubblock(label.trim()));
+      return;
+    }
+
+    // Supprimer une rubrique
+    if(action === 'delete-subblock'){
+      const sub = btn.closest('[data-subblock]');
+      if(!sub) return;
+      const ok = window.confirm('Supprimer cette rubrique ?');
+      if(!ok) return;
+      sub.remove();
+      return;
+    }
+
+    // Ajouter une ressource (au niveau rubrique)
+    if(action === 'add-resource'){
+      const sub = btn.closest('[data-subblock]');
+      if(!sub) return;
+      const title = window.prompt('Titre de la ressource (ex. Procédure PDF, Lien, Modèle...) :');
+      if(!title || !title.trim()) return;
+      const url = window.prompt('Lien URL (ou laisser vide si non disponible) :') || '#';
+      const list = sub.querySelector('.resources');
+      list.appendChild(createResourceItem(title.trim(), url));
+      return;
+    }
+
+    // Supprimer une ressource
+    if(action === 'delete-resource'){
+      const li = btn.closest('li');
+      if(!li) return;
+      li.remove();
+      return;
+    }
+  });
+</script>
 
 </body>
 </html>
+
 
 
