@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Intranet – Mission Locale Pays Basque</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --orange: #f39200;
+      --green: #95c11f;
+      --blue: #2897d5;
+      --dark: #2b2b2b;
+      --light: #f7f7f7;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: var(--light);
+      color: var(--dark);
+    }
+
+    header {
+      background: white;
+      border-bottom: 4px solid var(--orange);
+      padding: 1rem 2rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .container {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .block {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .block:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    .block h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      color: var(--orange);
+    }
+
+    .subblocks {
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .subblock {
+      background: var(--light);
+      padding: 0.6rem 0.8rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .subblock:hover {
+      background: var(--green);
+      color: white;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding: 1rem 2rem;
+      font-size: 0.85rem;
+      text-align: center;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Intranet – Mission Locale Pays Basque</h1>
+</header>
+
+<div class="container">
+  <div class="grid">
+
+    <div class="block">
+      <h2>Actualités internes</h2>
+      <div class="subblocks">
+        <div class="subblock">Infos Direction & CODIR</div>
+        <div class="subblock">Événements & temps forts</div>
+        <div class="subblock">Notes internes</div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Institution & gouvernance</h2>
+      <div class="subblocks">
+        <div class="subblock">Mission & valeurs</div>
+        <div class="subblock">Organigramme</div>
+        <div class="subblock">Statuts & cadres juridiques</div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Ressources & procédures</h2>
+      <div class="subblocks">
+        <div class="subblock">Accueil & accompagnement</div>
+        <div class="subblock">Ateliers collectifs</div>
+        <div class="subblock">Webinaires mobilités</div>
+        <div class="subblock">RGPD & conformité</div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Métiers & pratiques</h2>
+      <div class="subblocks">
+        <div class="subblock">Guides conseillers</div>
+        <div class="subblock">Fiches process</div>
+        <div class="subblock">FAQ métier</div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Outils quotidiens</h2>
+      <div class="subblocks">
+        <div class="subblock">i‑Milo</div>
+        <div class="subblock">linscription</div>
+        <div class="subblock">Agenda partagé</div>
+        <div class="subblock">Modèles de documents</div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Espaces projets</h2>
+      <div class="subblocks">
+        <div class="subblock">RPE & diagnostic partagé</div>
+        <div class="subblock">Mobilités & international</div>
+        <div class="subblock">Innovation & mécénat</div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Formation & professionnalisation</h2>
+      <div class="subblocks">
+        <div class="subblock">Formations internes</div>
+        <div class="subblock">MOOCs & e‑learning</div>
+        <div class="subblock">Ressources pédagogiques</div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Support & entraide</h2>
+      <div class="subblocks">
+        <div class="subblock">Assistance SI</div>
+        <div class="subblock">Base de connaissances</div>
+        <div class="subblock">Contacts utiles</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  © Mission Locale Pays Basque – Intranet interne
+</footer>
+
+</body>
+</html>
