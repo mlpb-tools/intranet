@@ -72,6 +72,9 @@
     }
 
     .subblock {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       background: var(--light);
       padding: 0.7rem 0.9rem;
       border-radius: 10px;
@@ -81,6 +84,26 @@
     }
 
     .subblock:hover {
+      background: rgba(0,0,0,0.05);
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .action-btn {
+      border: none;
+      background: white;
+      border-radius: 6px;
+      padding: 0.2rem 0.45rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+
+    .action-btn.add { color: #2ecc71; }
+    .action-btn.remove { color: #e74c3c; }
       background: rgba(0,0,0,0.05);
     }
 
@@ -105,7 +128,10 @@
 <body>
 
 <header>
-  <h1>Intranet – Mission Locale Pays Basque</h1>
+  <div style="display:flex; align-items:center; gap:1.5rem;">
+    <img src="https://static.wixstatic.com/media/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif/v1/fill/w_224,h_60,al_c,q_80,enc_avif,quality_auto/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif" alt="Logo Mission Locale Pays Basque" style="height:48px;" />
+    <h1 style="margin:0;">Intranet – Mission Locale Pays Basque</h1>
+  </div>
 </header>
 
 <div class="container">
@@ -115,100 +141,54 @@
     <div class="block">
       <h2>Actualités internes</h2>
       <div class="subblocks">
-        <div class="subblock">Infos Direction & CODIR</div>
-        <div class="subblock">Événements internes</div>
-        <div class="subblock">Notes internes</div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
       </div>
     </div>
 
     <div class="block">
       <h2>Institution & gouvernance</h2>
       <div class="subblocks">
-        <div class="subblock">Projet associatif & gouvernance</div>
-        <div class="subblock">Convention Collective (CCN)</div>
-        <div class="subblock">Espace RH & vie du salarié</div>
-        <div class="subblock">Réseaux ARML & UNML</div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
       </div>
     </div>
 
     <div class="block">
       <h2>Accueil & accompagnement</h2>
       <div class="subblocks">
-        <div class="subblock">Fiche process – Premier accueil</div>
-        <div class="subblock">Fiche process – Diagnostic</div>
-        <div class="subblock">Fiche process – Dispositifs</div>
-        <div class="subblock">Fiche process – Ateliers collectifs</div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
       </div>
     </div>
 
     <div class="block orientation">
-      <h2>Orientation</h2>
+      <h2>Ressources thématiques</h2>
       <div class="subblocks">
-        <div class="subblock">Centres d’intérêts & envies</div>
-        <div class="subblock">Découverte des métiers</div>
-        <div class="subblock">Confirmation du projet</div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
       </div>
     </div>
-
-    <div class="block emploi">
-      <h2>Emploi</h2>
-      <div class="subblocks">
-        <div class="subblock">Offres d’emploi & apprentissage</div>
-        <div class="subblock">Candidatures & CV</div>
-        <div class="subblock">Préparation aux entretiens</div>
-      </div>
-    </div>
-
-    <div class="block formation">
-      <h2>Formation</h2>
-      <div class="subblocks">
-        <div class="subblock">Recherche de formation</div>
-        <div class="subblock">Financement & rémunération</div>
-        <div class="subblock">Candidatures & démarches</div>
-      </div>
-    </div>
-
-    <div class="block mobilite">
-      <h2>Se déplacer / Partir à l’étranger</h2>
-      <div class="subblocks">
-        <div class="subblock">Mobilité locale & permis</div>
-        <div class="subblock">Transports & aides</div>
-        <div class="subblock">Mobilité internationale</div>
-      </div>
-    </div>
-
-    <div class="block quotidien">
-      <h2>Démarches & vie quotidienne</h2>
-      <div class="subblocks">
-        <div class="subblock">Démarches administratives</div>
-        <div class="subblock">Aides sociales & financières</div>
-        <div class="subblock">Outils du quotidien</div>
-      </div>
-    </div>
-
-    <div class="block sante">
-      <h2>Santé</h2>
-      <div class="subblocks">
-        <div class="subblock">Accès aux soins</div>
-        <div class="subblock">Mutuelle & droits</div>
-        <div class="subblock">Prévention & bien‑être</div>
-      </div>
-    </div>
-
-    <div class="block citoyennete">
-      <h2>Citoyenneté & numérique</h2>
-      <div class="subblocks">
-        <div class="subblock">Engagement & bénévolat</div>
-        <div class="subblock">Culture & loisirs</div>
-        <div class="subblock">Usages numériques</div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
       </div>
     </div>
 
     <div class="block">
       <h2>Territoires</h2>
       <div class="subblocks">
-        <div class="subblock">BAB Nord</div>
-        <div class="subblock">BAB Sud</div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
+        <div class="subblock"><span>$1</span><span class="actions"><button class="action-btn add">＋</button><button class="action-btn remove">–</button></span></div>
         <div class="subblock">Sud Pays Basque</div>
         <div class="subblock">Pays Basque Intérieur</div>
       </div>
@@ -233,9 +213,14 @@
     </div>
 
     <div class="block">
-      <h2>Espaces projets</h2>
+      <h2>Projets structurants</h2>
       <div class="subblocks">
-        <div class="subblock">RPE & diagnostic partagé</div>
+        <div class="subblock">ERIP</div>
+        <div class="subblock">BETI LAN</div>
+        <div class="subblock">Projets européens</div>
+        <div class="subblock">Transfrontalier</div>
+      </div>
+    </div>
         <div class="subblock">Mobilités</div>
         <div class="subblock">Innovation & mécénat</div>
       </div>
@@ -250,3 +235,4 @@
 
 </body>
 </html>
+
