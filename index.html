@@ -4,1318 +4,617 @@
   <meta charset="UTF-8" />
   <title>Intranet – Mission Locale Pays Basque</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* Palette Missions Locales */
-      --ml-gray: #e8e8e8;
-      --ml-blue: #41b6e6;
-      --ml-magenta: #d6145f;
-      --ml-yellow: #ffc72c;
-      --ml-coral: #ff6b6b;
-      --ml-mint: #00d9bf;
-      --ml-lime: #c8d82f;
-      --ml-teal: #5ac8c1;
-      --ml-orange: #f39200;
-      
-      /* Système */
-      --dark: #1a1a1a;
-      --dark-soft: #2d2d2d;
-      --light: #fafafa;
-      --card: #ffffff;
-      --shadow: rgba(0,0,0,0.08);
-      --shadow-hover: rgba(0,0,0,0.16);
-      --border: rgba(0,0,0,0.06);
-      --muted: #6b7280;
-      --text: #2d2d2d;
-      
-      /* Animations */
-      --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-      --bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      --ml-orange:#f39200;
+      --ml-blue:#2897d5;
+      --ml-green:#95c11f;
+      --ml-purple:#7b4fa3;
+      --ml-red:#e74c3c;
+      --ml-yellow:#f1c40f;
+      --ml-teal:#1abc9c;
+      --dark:#2b2b2b;
+      --light:#f7f7f7;
+      --card:#ffffff;
+      --muted:#6b7280;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *{ box-sizing:border-box; }
 
-    body {
-      font-family: 'Open Sans', -apple-system, sans-serif;
-      background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
+    body{
+      margin:0;
+      font-family: Inter, Arial, sans-serif;
+      background:var(--light);
+      color:var(--dark);
     }
 
-    /* HEADER */
-    header {
-      background: var(--card);
-      box-shadow: 0 2px 20px var(--shadow);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 4px solid var(--ml-orange);
+    header{
+      background:var(--card);
+      border-bottom:5px solid var(--ml-orange);
+      padding: 1.1rem 1.6rem;
     }
 
-    .header-content {
-      max-width: 1400px;
+    .header-row{
+      display:flex;
+      align-items:center;
+      gap:1rem;
+    }
+
+    .header-row img{
+      height:46px;
+      width:auto;
+      display:block;
+    }
+
+    header h1{
+      margin:0;
+      font-size:1.35rem;
+      letter-spacing:0.2px;
+    }
+
+    .container{
+      padding: 1.8rem;
+      max-width: 1320px;
       margin: 0 auto;
-      padding: 1.2rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 2rem;
     }
 
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.9rem;
     }
 
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+    .block{
+      background:var(--card);
+      border-radius:16px;
+      padding: 0.9rem 0.9rem 0.8rem;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+      transition: transform .18s ease, box-shadow .18s ease;
     }
 
-    .logo {
-      height: 52px;
-      width: auto;
-      display: block;
+    .block:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.12);
     }
 
-    .header-title {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
+    .block-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:0.75rem;
+      margin-bottom: 0.9rem;
     }
 
-    .header-title h1 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--dark);
-      letter-spacing: -0.02em;
-      margin: 0;
+    .block h2{
+      margin:0;
+      font-size:0.98rem;
+      line-height:1.15;
     }
 
-    .header-title .subtitle {
-      font-size: 0.85rem;
-      color: var(--muted);
-      font-weight: 500;
+    .block-meta{
+      font-size:0.74rem;
+      color:var(--muted);
+      margin-top:0.15rem;
     }
 
-    .header-actions {
-      display: flex;
-      gap: 0.75rem;
-      align-items: center;
+    .subblocks{
+      display:grid;
+      gap: 0.6rem;
     }
 
-    .search-box {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    .search-box input {
-      padding: 0.65rem 1rem 0.65rem 2.75rem;
-      border: 2px solid var(--border);
-      border-radius: 25px;
-      font-size: 0.9rem;
-      width: 280px;
-      transition: var(--transition);
-      font-family: inherit;
+    .subblock{
       background: var(--light);
+      border-radius: 10px;
+      padding: 0.5rem 0.6rem;
+      transition: background 0.2s ease;
+      border: 1px solid rgba(0,0,0,0.04);
     }
 
-    .search-box input:focus {
-      outline: none;
-      border-color: var(--ml-blue);
-      box-shadow: 0 0 0 3px rgba(65, 182, 230, 0.1);
-      background: white;
+    .subblock:hover{ background: rgba(0,0,0,0.045); }
+
+    .subrow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 0.7rem;
     }
 
-    .search-icon {
-      position: absolute;
-      left: 1rem;
-      color: var(--muted);
-      pointer-events: none;
+    .label{
+      font-size:0.82rem;
+      font-weight:600;
+      line-height:1.15;
     }
 
-    .icon-btn {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
+    .actions{
+      display:flex;
+      align-items:center;
+      gap: 0.35rem;
+      flex-shrink:0;
+    }
+
+    .btn{
       border: none;
-      background: var(--light);
+      background: #fff;
+      border-radius: 8px;
+      padding: 0.25rem 0.45rem;
+      font-size: 0.78rem;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--transition);
-      color: var(--dark);
-      font-size: 1.2rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+      transition: transform .12s ease;
+      line-height:1;
     }
 
-    .icon-btn:hover {
-      background: var(--ml-blue);
-      color: white;
-      transform: scale(1.1);
-    }
+    .btn:active{ transform: scale(0.97); }
+    .btn.add{ color:#16a34a; }
+    .btn.del{ color:#dc2626; }
+    .btn.small{ font-size:0.74rem; padding:0.22rem 0.40rem; }
 
-    /* CONTAINER */
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 2.5rem 2rem;
-    }
-
-    .welcome-banner {
-      background: linear-gradient(135deg, var(--ml-blue) 0%, var(--ml-magenta) 100%);
-      border-radius: 20px;
-      padding: 2.5rem;
-      margin-bottom: 2.5rem;
-      color: white;
-      box-shadow: 0 8px 30px rgba(65, 182, 230, 0.3);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .welcome-banner::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -10%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-
-    .welcome-banner h2 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      position: relative;
-    }
-
-    .welcome-banner p {
-      font-size: 1.1rem;
-      opacity: 0.95;
-      position: relative;
-    }
-
-    /* GRID */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 1.8rem;
-      animation: fadeInUp 0.6s ease-out;
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* BLOCK - Carte principale */
-    .block {
-      background: var(--card);
-      border-radius: 20px;
+    .resources{
+      margin: 0.55rem 0 0;
       padding: 0;
-      box-shadow: 0 4px 20px var(--shadow);
-      transition: var(--transition);
-      overflow: hidden;
-      position: relative;
-      animation: slideIn 0.5s var(--bounce);
-    }
-
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: scale(0.9);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    .block:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 40px var(--shadow-hover);
-    }
-
-    /* En-tête de bloc avec couleur thématique */
-    .block-header {
-      padding: 1.5rem 1.5rem 1.2rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .block-header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 5px;
-      background: linear-gradient(90deg, currentColor 0%, transparent 100%);
-    }
-
-    .block-header-content {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      position: relative;
-    }
-
-    .block-icon {
-      width: 54px;
-      height: 54px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.6rem;
-      flex-shrink: 0;
-      color: white;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-
-    .block-header-text {
-      flex: 1;
-    }
-
-    .block h2 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin: 0 0 0.4rem 0;
-      letter-spacing: -0.01em;
-    }
-
-    .block-meta {
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.4;
-    }
-
-    .block-actions {
-      display: flex;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-    }
-
-    .action-btn {
-      padding: 0.4rem 0.85rem;
-      border: none;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .action-btn.primary {
-      background: currentColor;
-      color: white;
-      opacity: 0.9;
-    }
-
-    .action-btn.primary:hover {
-      opacity: 1;
-      transform: scale(1.05);
-    }
-
-    .action-btn.secondary {
-      background: var(--light);
-      color: var(--text);
-    }
-
-    .action-btn.secondary:hover {
-      background: var(--border);
-    }
-
-    /* Corps du bloc */
-    .block-body {
-      padding: 0 1.5rem 1.5rem;
-    }
-
-    /* Subblocks - Sous-sections */
-    .subblocks {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .subblock {
-      background: var(--light);
-      border-radius: 12px;
-      padding: 1rem;
-      border: 2px solid transparent;
-      transition: var(--transition);
-      position: relative;
-    }
-
-    .subblock:hover {
-      border-color: currentColor;
-      background: white;
-      transform: translateX(4px);
-    }
-
-    .subblock-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .subblock-label {
-      font-weight: 600;
-      font-size: 0.95rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .subblock-label::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: currentColor;
-      display: inline-block;
-    }
-
-    .subblock-actions {
-      display: flex;
-      gap: 0.4rem;
-    }
-
-    .icon-btn-small {
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      border: none;
-      background: white;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--transition);
-      font-size: 1rem;
-      color: var(--muted);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
-    }
-
-    .icon-btn-small:hover {
-      transform: scale(1.15);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.12);
-    }
-
-    .icon-btn-small.add:hover {
-      background: #10b981;
-      color: white;
-    }
-
-    .icon-btn-small.delete:hover {
-      background: #ef4444;
-      color: white;
-    }
-
-    /* Resources - Liste de liens */
-    .resources {
       list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+      display:grid;
+      gap: 0.35rem;
     }
 
-    .resource-item {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.6rem 0.85rem;
-      background: white;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      transition: var(--transition);
+    .resources li{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:0.6rem;
+      background:#fff;
+      border-radius:10px;
+      padding:0.45rem 0.55rem;
+      border:1px solid rgba(0,0,0,0.05);
     }
 
-    .resource-item:hover {
-      border-color: currentColor;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      transform: translateX(3px);
-    }
-
-    .resource-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 6px;
-      background: var(--light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      flex-shrink: 0;
-      color: currentColor;
-    }
-
-    .resource-item a {
-      flex: 1;
-      text-decoration: none;
+    .resources a{
       color: var(--dark);
-      font-size: 0.9rem;
-      font-weight: 500;
-      overflow: hidden;
+      text-decoration: none;
+      font-size:0.8rem;
+      overflow:hidden;
       text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 180px;
+    }
+
+    .resources a:hover{ text-decoration: underline; }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:0.35rem;
+      font-size:0.78rem;
+      color: var(--muted);
+      background: rgba(0,0,0,0.04);
+      border-radius: 999px;
+      padding: 0.25rem 0.55rem;
       white-space: nowrap;
     }
 
-    .resource-item a:hover {
-      color: currentColor;
+    footer{
+      margin-top: 2.2rem;
+      padding: 1rem 1.6rem;
+      text-align:center;
+      color:#666;
+      font-size:0.85rem;
     }
 
-    .resource-actions {
-      display: flex;
-      gap: 0.3rem;
-    }
-
-    /* Badge de statut */
-    .status-badge {
-      padding: 0.25rem 0.65rem;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-    }
-
-    .status-badge.new {
-      background: #dbeafe;
-      color: #1e40af;
-    }
-
-    .status-badge.important {
-      background: #fee2e2;
-      color: #991b1b;
-    }
-
-    /* Couleurs thématiques pour chaque bloc */
-    .c-blue { color: var(--ml-blue); }
-    .c-blue .block-icon { background: var(--ml-blue); }
-    
-    .c-orange { color: var(--ml-orange); }
-    .c-orange .block-icon { background: var(--ml-orange); }
-    
-    .c-magenta { color: var(--ml-magenta); }
-    .c-magenta .block-icon { background: var(--ml-magenta); }
-    
-    .c-yellow { color: var(--ml-yellow); }
-    .c-yellow .block-icon { background: var(--ml-yellow); }
-    
-    .c-coral { color: var(--ml-coral); }
-    .c-coral .block-icon { background: var(--ml-coral); }
-    
-    .c-mint { color: var(--ml-mint); }
-    .c-mint .block-icon { background: var(--ml-mint); }
-    
-    .c-lime { color: var(--ml-lime); }
-    .c-lime .block-icon { background: var(--ml-lime); }
-    
-    .c-teal { color: var(--ml-teal); }
-    .c-teal .block-icon { background: var(--ml-teal); }
-
-    /* FOOTER */
-    footer {
-      margin-top: 4rem;
-      padding: 2rem;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.9rem;
-      background: var(--card);
-      box-shadow: 0 -2px 20px var(--shadow);
-    }
-
-    footer p {
-      margin: 0.3rem 0;
-    }
-
-    .footer-links {
-      margin-top: 1rem;
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: var(--ml-blue);
-      text-decoration: none;
-      font-weight: 600;
-      transition: var(--transition);
-    }
-
-    .footer-links a:hover {
-      color: var(--ml-magenta);
-    }
-
-    /* MODAL */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(4px);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .modal.active {
-      display: flex;
-    }
-
-    .modal-content {
-      background: white;
-      border-radius: 20px;
-      padding: 2rem;
-      max-width: 500px;
-      width: 90%;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-      animation: scaleIn 0.3s var(--bounce);
-    }
-
-    @keyframes scaleIn {
-      from {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.5rem;
-    }
-
-    .modal-header h3 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.4rem;
-      margin: 0;
-    }
-
-    .modal-close {
-      width: 32px;
-      height: 32px;
-      border: none;
-      background: var(--light);
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--transition);
-    }
-
-    .modal-close:hover {
-      background: var(--ml-coral);
-      color: white;
-      transform: rotate(90deg);
-    }
-
-    .modal-body {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .form-group label {
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--dark);
-    }
-
-    .form-group input {
-      padding: 0.75rem 1rem;
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      font-size: 0.95rem;
-      font-family: inherit;
-      transition: var(--transition);
-    }
-
-    .form-group input:focus {
-      outline: none;
-      border-color: var(--ml-blue);
-      box-shadow: 0 0 0 3px rgba(65, 182, 230, 0.1);
-    }
-
-    .modal-actions {
-      display: flex;
-      gap: 0.75rem;
-      margin-top: 1rem;
-    }
-
-    .btn-modal {
-      flex: 1;
-      padding: 0.85rem 1.5rem;
-      border: none;
-      border-radius: 10px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-      font-family: inherit;
-    }
-
-    .btn-modal.primary {
-      background: var(--ml-blue);
-      color: white;
-    }
-
-    .btn-modal.primary:hover {
-      background: var(--ml-magenta);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(214, 20, 95, 0.3);
-    }
-
-    .btn-modal.secondary {
-      background: var(--light);
-      color: var(--text);
-    }
-
-    .btn-modal.secondary:hover {
-      background: var(--border);
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .header-content {
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      .search-box input {
-        width: 100%;
-      }
-
-      .welcome-banner {
-        padding: 1.5rem;
-      }
-
-      .welcome-banner h2 {
-        font-size: 1.5rem;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-links {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-    }
-
-    /* EMPTY STATE */
-    .empty-state {
-      text-align: center;
-      padding: 2rem 1rem;
-      color: var(--muted);
-      font-style: italic;
-    }
-
-    .empty-state::before {
-      content: '📂';
-      display: block;
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-      opacity: 0.5;
-    }
+    /* Couleurs par bloc (une couleur = un bloc) */
+    .c-orange h2 { color: var(--ml-orange); }
+    .c-blue h2 { color: var(--ml-blue); }
+    .c-green h2 { color: var(--ml-green); }
+    .c-purple h2 { color: var(--ml-purple); }
+    .c-red h2 { color: var(--ml-red); }
+    .c-yellow h2 { color: var(--ml-yellow); }
+    .c-teal h2 { color: var(--ml-teal); }
   </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header>
-  <div class="header-content">
-    <div class="header-left">
-      <div class="logo-container">
-        <img class="logo" src="https://static.wixstatic.com/media/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif/v1/fill/w_224,h_60,al_c,q_80,enc_avif,quality_auto/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif" alt="Logo MLPB" />
-      </div>
-      <div class="header-title">
-        <h1>Intranet MLPB</h1>
-        <span class="subtitle">Prototype agile • Interface collaborative</span>
-      </div>
-    </div>
-    
-    <div class="header-actions">
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" placeholder="Rechercher une ressource..." id="searchInput" />
-      </div>
-      <button class="icon-btn" title="Notifications">🔔</button>
-      <button class="icon-btn" title="Mon profil">👤</button>
+  <div class="header-row">
+    <img
+      src="https://static.wixstatic.com/media/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif/v1/fill/w_224,h_60,al_c,q_80,enc_avif,quality_auto/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif"
+      alt="Logo Mission Locale Pays Basque"
+    />
+    <div>
+      <h1>Intranet – Mission Locale Pays Basque</h1>
+      <div class="block-meta">Prototype agile : ajouter/supprimer des rubriques et des ressources par bloc.</div>
     </div>
   </div>
 </header>
 
-<!-- MAIN CONTAINER -->
 <div class="container">
-
-  <!-- WELCOME BANNER -->
-  <div class="welcome-banner">
-    <h2>Bienvenue sur votre intranet ! 👋</h2>
-    <p>Accédez rapidement à toutes vos ressources, outils et informations. Prototype agile : personnalisez et enrichissez votre espace.</p>
-  </div>
-
-  <!-- GRID -->
-  <div class="grid" id="mainGrid">
+  <div class="grid" id="grid">
 
     <!-- ACTUALITÉS INTERNES -->
     <section class="block c-blue" data-block="actualites">
-      <div class="block-header">
-        <div class="block-header-content">
-          <div class="block-icon">📰</div>
-          <div class="block-header-text">
-            <h2>Actualités internes</h2>
-            <div class="block-meta">Infos Direction • Événements • Notes de service</div>
-          </div>
+      <div class="block-head">
+        <div>
+          <h2>Actualités internes</h2>
+          <div class="block-meta">Infos Direction • Événements • Notes</div>
         </div>
-        <div class="block-actions">
-          <button class="action-btn primary" data-action="add-subblock">➕ Rubrique</button>
+        <div class="actions">
+          <span class="pill">Rubrique</span>
+          <button class="btn add" data-action="add-subblock" title="Ajouter une rubrique">＋</button>
         </div>
       </div>
-      
-      <div class="block-body">
-        <div class="subblocks">
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">Infos Direction & CODIR</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource" title="Ajouter">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock" title="Supprimer">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
-          </div>
 
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">Événements internes</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
+      <div class="subblocks">
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Infos Direction & CODIR</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource" title="Ajouter une ressource">＋</button>
+              <button class="btn del small" data-action="delete-subblock" title="Supprimer la rubrique">×</button>
+            </span>
           </div>
+          <ul class="resources"></ul>
+        </div>
 
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">Notes internes</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Événements internes</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource">＋</button>
+              <button class="btn del small" data-action="delete-subblock">×</button>
+            </span>
           </div>
+          <ul class="resources"></ul>
+        </div>
+
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Notes internes</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource">＋</button>
+              <button class="btn del small" data-action="delete-subblock">×</button>
+            </span>
+          </div>
+          <ul class="resources"></ul>
         </div>
       </div>
     </section>
 
     <!-- INSTITUTION & GOUVERNANCE -->
     <section class="block c-orange" data-block="institution">
-      <div class="block-header">
-        <div class="block-header-content">
-          <div class="block-icon">🏛️</div>
-          <div class="block-header-text">
-            <h2>Institution & gouvernance</h2>
-            <div class="block-meta">CCN • RH • Réseau ARML/UNML</div>
-          </div>
+      <div class="block-head">
+        <div>
+          <h2>Institution & gouvernance</h2>
+          <div class="block-meta">CCN • RH • Réseau ARML/UNML</div>
         </div>
-        <div class="block-actions">
-          <button class="action-btn primary" data-action="add-subblock">➕ Rubrique</button>
+        <div class="actions">
+          <span class="pill">Rubrique</span>
+          <button class="btn add" data-action="add-subblock">＋</button>
         </div>
       </div>
-      
-      <div class="block-body">
-        <div class="subblocks">
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">Projet associatif</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
-          </div>
 
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">Convention Collective</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
+      <div class="subblocks">
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Projet associatif & gouvernance</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource">＋</button>
+              <button class="btn del small" data-action="delete-subblock">×</button>
+            </span>
           </div>
+          <ul class="resources"></ul>
+        </div>
 
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">Espace RH</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Convention Collective (CCN)</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource">＋</button>
+              <button class="btn del small" data-action="delete-subblock">×</button>
+            </span>
           </div>
+          <ul class="resources"></ul>
+        </div>
 
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">Réseau ARML & UNML</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Espace RH & vie du salarié</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource">＋</button>
+              <button class="btn del small" data-action="delete-subblock">×</button>
+            </span>
           </div>
+          <ul class="resources"></ul>
+        </div>
+
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Réseau ARML & UNML</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource">＋</button>
+              <button class="btn del small" data-action="delete-subblock">×</button>
+            </span>
+          </div>
+          <ul class="resources"></ul>
         </div>
       </div>
     </section>
 
     <!-- ACCUEIL & ACCOMPAGNEMENT -->
-    <section class="block c-magenta" data-block="accueil">
-      <div class="block-header">
-        <div class="block-header-content">
-          <div class="block-icon">🎯</div>
-          <div class="block-header-text">
-            <h2>Accueil & accompagnement</h2>
-            <div class="block-meta">Process cœur de métier</div>
-          </div>
+    <section class="block c-green" data-block="accueil">
+      <div class="block-head">
+        <div>
+          <h2>Accueil & accompagnement</h2>
+          <div class="block-meta">Process cœur de métier</div>
         </div>
-        <div class="block-actions">
-          <button class="action-btn primary" data-action="add-subblock">➕ Process</button>
+        <div class="actions">
+          <span class="pill">Process</span>
+          <button class="btn add" data-action="add-subblock">＋</button>
         </div>
       </div>
-      
-      <div class="block-body">
-        <div class="subblocks">
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">Premier accueil</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
-          </div>
 
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">Diagnostic</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
+      <div class="subblocks">
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Process – Premier accueil</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource">＋</button>
+              <button class="btn del small" data-action="delete-subblock">×</button>
+            </span>
           </div>
+          <ul class="resources"></ul>
+        </div>
 
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">Dispositifs</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Process – Diagnostic</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource">＋</button>
+              <button class="btn del small" data-action="delete-subblock">×</button>
+            </span>
           </div>
+          <ul class="resources"></ul>
+        </div>
 
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">Ateliers collectifs</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Process – Dispositifs</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource">＋</button>
+              <button class="btn del small" data-action="delete-subblock">×</button>
+            </span>
           </div>
+          <ul class="resources"></ul>
+        </div>
+
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Process – Ateliers collectifs</span>
+            <span class="actions">
+              <button class="btn add small" data-action="add-resource">＋</button>
+              <button class="btn del small" data-action="delete-subblock">×</button>
+            </span>
+          </div>
+          <ul class="resources"></ul>
         </div>
       </div>
     </section>
 
     <!-- RESSOURCES THÉMATIQUES -->
-    <section class="block c-teal" data-block="thematiques">
-      <div class="block-header">
-        <div class="block-header-content">
-          <div class="block-icon">📚</div>
-          <div class="block-header-text">
-            <h2>Ressources thématiques</h2>
-            <div class="block-meta">7 univers (calque site public)</div>
-          </div>
+    <section class="block c-purple" data-block="thematiques">
+      <div class="block-head">
+        <div>
+          <h2>Ressources thématiques</h2>
+          <div class="block-meta">7 univers (calque site public) – contenus internes</div>
         </div>
-        <div class="block-actions">
-          <button class="action-btn primary" data-action="add-subblock">➕ Thème</button>
+        <div class="actions">
+          <span class="pill">Rubrique</span>
+          <button class="btn add" data-action="add-subblock">＋</button>
         </div>
       </div>
-      
-      <div class="block-body">
-        <div class="subblocks">
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">🧭 Orientation</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
-          </div>
 
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">🤝 Emploi</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
+      <div class="subblocks">
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Orientation</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
           </div>
-
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">🎓 Formation</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Emploi</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
           </div>
-
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">✈️ Mobilité internationale</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Formation</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
           </div>
-
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">📋 Démarches quotidiennes</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Se déplacer / Partir à l’étranger</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
           </div>
-
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">🏥 Santé</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Démarches & vie quotidienne</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
           </div>
-
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">💻 Citoyenneté & numérique</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Santé</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
           </div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Citoyenneté & numérique</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
+          </div>
+          <ul class="resources"></ul>
         </div>
       </div>
     </section>
 
     <!-- TERRITOIRES -->
     <section class="block c-yellow" data-block="territoires">
-      <div class="block-header">
-        <div class="block-header-content">
-          <div class="block-icon">🗺️</div>
-          <div class="block-header-text">
-            <h2>Territoires</h2>
-            <div class="block-meta">BAB Nord • BAB Sud • Sud PB • PBI</div>
-          </div>
+      <div class="block-head">
+        <div>
+          <h2>Territoires</h2>
+          <div class="block-meta">BAB Nord • BAB Sud • Sud PB • PBI</div>
         </div>
-        <div class="block-actions">
-          <button class="action-btn primary" data-action="add-subblock">➕ Territoire</button>
+        <div class="actions">
+          <span class="pill">Territoire</span>
+          <button class="btn add" data-action="add-subblock">＋</button>
         </div>
       </div>
-      
-      <div class="block-body">
-        <div class="subblocks">
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">BAB Nord</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
-          </div>
 
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">BAB Sud</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
+      <div class="subblocks">
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">BAB Nord</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
           </div>
-
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">Sud Pays Basque</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">BAB Sud</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
           </div>
-
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">Pays Basque Intérieur</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Sud Pays Basque</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
           </div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Pays Basque Intérieur</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
+          </div>
+          <ul class="resources"></ul>
         </div>
       </div>
     </section>
 
     <!-- OUTILS QUOTIDIENS -->
-    <section class="block c-lime" data-block="outils">
-      <div class="block-header">
-        <div class="block-header-content">
-          <div class="block-icon">🛠️</div>
-          <div class="block-header-text">
-            <h2>Outils quotidiens</h2>
-            <div class="block-meta">Accès rapide aux outils de travail</div>
-          </div>
+    <section class="block c-teal" data-block="outils">
+      <div class="block-head">
+        <div>
+          <h2>Outils quotidiens</h2>
+          <div class="block-meta">Accès rapide aux outils de travail</div>
         </div>
-        <div class="block-actions">
-          <button class="action-btn primary" data-action="add-subblock">➕ Outil</button>
+        <div class="actions">
+          <span class="pill">Outil</span>
+          <button class="btn add" data-action="add-subblock">＋</button>
         </div>
       </div>
-      
-      <div class="block-body">
-        <div class="subblocks">
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">i-Milo</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
-          </div>
 
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">linscription</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
+      <div class="subblocks">
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">i-Milo</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
           </div>
-
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">Agenda partagé</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">linscription</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
           </div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Agenda partagé</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
+          </div>
+          <ul class="resources"></ul>
         </div>
       </div>
     </section>
 
     <!-- FORMATION & PROFESSIONNALISATION -->
-    <section class="block c-coral" data-block="formation">
-      <div class="block-header">
-        <div class="block-header-content">
-          <div class="block-icon">📖</div>
-          <div class="block-header-text">
-            <h2>Formation & professionnalisation</h2>
-            <div class="block-meta">Montée en compétences & ressources</div>
-          </div>
+    <section class="block c-red" data-block="formationpro">
+      <div class="block-head">
+        <div>
+          <h2>Formation & professionnalisation</h2>
+          <div class="block-meta">Montée en compétences & ressources</div>
         </div>
-        <div class="block-actions">
-          <button class="action-btn primary" data-action="add-subblock">➕ Formation</button>
+        <div class="actions">
+          <span class="pill">Rubrique</span>
+          <button class="btn add" data-action="add-subblock">＋</button>
         </div>
       </div>
-      
-      <div class="block-body">
-        <div class="subblocks">
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">Formations internes</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
-          </div>
 
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">MOOCs & e-learning</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
+      <div class="subblocks">
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Formations internes</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
           </div>
-
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">Ressources pédagogiques</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">MOOCs & e-learning</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
           </div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow">
+            <span class="label">Ressources pédagogiques</span>
+            <span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span>
+          </div>
+          <ul class="resources"></ul>
         </div>
       </div>
     </section>
 
     <!-- PROJETS STRUCTURANTS -->
-    <section class="block c-mint" data-block="projets">
-      <div class="block-header">
-        <div class="block-header-content">
-          <div class="block-icon">🚀</div>
-          <div class="block-header-text">
-            <h2>Projets structurants</h2>
-            <div class="block-meta">ERIP • BETI LAN • Europe • Transfrontalier</div>
-          </div>
+    <section class="block c-green" data-block="projets">
+      <div class="block-head">
+        <div>
+          <h2>Projets structurants</h2>
+          <div class="block-meta">ERIP • BETI LAN • Europe • Transfrontalier</div>
         </div>
-        <div class="block-actions">
-          <button class="action-btn primary" data-action="add-subblock">➕ Projet</button>
+        <div class="actions">
+          <span class="pill">Projet</span>
+          <button class="btn add" data-action="add-subblock">＋</button>
         </div>
       </div>
-      
-      <div class="block-body">
-        <div class="subblocks">
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">ERIP</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
-          </div>
 
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">BETI LAN</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
-          </div>
-
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">Projets européens</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
-          </div>
-
-          <div class="subblock" data-subblock>
-            <div class="subblock-header">
-              <span class="subblock-label">Transfrontalier</span>
-              <div class="subblock-actions">
-                <button class="icon-btn-small add" data-action="add-resource">➕</button>
-                <button class="icon-btn-small delete" data-action="delete-subblock">✕</button>
-              </div>
-            </div>
-            <ul class="resources"></ul>
-          </div>
+      <div class="subblocks">
+        <div class="subblock" data-subblock>
+          <div class="subrow"><span class="label">ERIP</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow"><span class="label">BETI LAN</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow"><span class="label">Projets européens</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div>
+          <ul class="resources"></ul>
+        </div>
+        <div class="subblock" data-subblock>
+          <div class="subrow"><span class="label">Transfrontalier</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div>
+          <ul class="resources"></ul>
         </div>
       </div>
     </section>
@@ -1323,256 +622,99 @@
   </div>
 </div>
 
-<!-- FOOTER -->
-<footer>
-  <p><strong>© Mission Locale Pays Basque</strong> – Intranet collaboratif</p>
-  <p>Prototype agile • Version 2.0</p>
-  <div class="footer-links">
-    <a href="#">Aide & Support</a>
-    <a href="#">Signaler un bug</a>
-    <a href="#">Proposer une amélioration</a>
-    <a href="#">Contact IT</a>
-  </div>
-</footer>
-
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3 id="modalTitle">Ajouter une ressource</h3>
-      <button class="modal-close" onclick="closeModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label for="inputTitle">Titre de la ressource</label>
-        <input type="text" id="inputTitle" placeholder="Ex: Procédure PDF, Guide, Modèle..." />
-      </div>
-      <div class="form-group">
-        <label for="inputUrl">Lien URL (optionnel)</label>
-        <input type="url" id="inputUrl" placeholder="https://..." />
-      </div>
-    </div>
-    <div class="modal-actions">
-      <button class="btn-modal secondary" onclick="closeModal()">Annuler</button>
-      <button class="btn-modal primary" id="modalConfirm">Ajouter</button>
-    </div>
-  </div>
-</div>
+<footer>© Mission Locale Pays Basque – Intranet interne</footer>
 
 <script>
-  // Variables globales
-  let currentAction = null;
-  let currentTarget = null;
+  // Prototype « agile » :
+  // - + sur un bloc : ajoute une rubrique (subblock)
+  // - + sur une rubrique : ajoute une ressource (lien)
+  // - × sur une rubrique : supprime la rubrique
+  // - × sur une ressource : supprime la ressource
 
-  // Fonctions modal
-  function openModal(title, confirmCallback) {
-    document.getElementById('modalTitle').textContent = title;
-    document.getElementById('inputTitle').value = '';
-    document.getElementById('inputUrl').value = '';
-    document.getElementById('modal').classList.add('active');
-    
-    const confirmBtn = document.getElementById('modalConfirm');
-    confirmBtn.onclick = confirmCallback;
-    
-    // Focus sur le premier input
-    setTimeout(() => document.getElementById('inputTitle').focus(), 100);
-  }
-
-  function closeModal() {
-    document.getElementById('modal').classList.remove('active');
-    currentAction = null;
-    currentTarget = null;
-  }
-
-  // Fermeture sur clic en dehors
-  document.getElementById('modal').addEventListener('click', (e) => {
-    if (e.target.id === 'modal') closeModal();
-  });
-
-  // Fermeture sur Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && document.getElementById('modal').classList.contains('active')) {
-      closeModal();
-    }
-  });
-
-  // Création d'éléments
-  function createSubblock(labelText) {
+  function createSubblock(labelText){
     const wrap = document.createElement('div');
     wrap.className = 'subblock';
-    wrap.setAttribute('data-subblock', '');
-    
+    wrap.setAttribute('data-subblock','');
+
     wrap.innerHTML = `
-      <div class="subblock-header">
-        <span class="subblock-label">${labelText}</span>
-        <div class="subblock-actions">
-          <button class="icon-btn-small add" data-action="add-resource" title="Ajouter une ressource">➕</button>
-          <button class="icon-btn-small delete" data-action="delete-subblock" title="Supprimer">✕</button>
-        </div>
+      <div class="subrow">
+        <span class="label"></span>
+        <span class="actions">
+          <button class="btn add small" data-action="add-resource" title="Ajouter une ressource">＋</button>
+          <button class="btn del small" data-action="delete-subblock" title="Supprimer la rubrique">×</button>
+        </span>
       </div>
       <ul class="resources"></ul>
     `;
-    
-    // Animation d'entrée
-    wrap.style.opacity = '0';
-    wrap.style.transform = 'translateX(-20px)';
-    setTimeout(() => {
-      wrap.style.transition = 'all 0.3s ease';
-      wrap.style.opacity = '1';
-      wrap.style.transform = 'translateX(0)';
-    }, 10);
-    
+
+    wrap.querySelector('.label').textContent = labelText;
     return wrap;
   }
 
-  function createResourceItem(title, url) {
+  function createResourceItem(title, url){
     const li = document.createElement('li');
-    li.className = 'resource-item';
     const safeUrl = url?.trim() || '#';
-    
+
     li.innerHTML = `
-      <div class="resource-icon">📄</div>
-      <a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${title?.trim() || 'Ressource'}</a>
-      <div class="resource-actions">
-        <button class="icon-btn-small delete" data-action="delete-resource" title="Supprimer">✕</button>
-      </div>
+      <a href="${safeUrl}" target="_blank" rel="noopener noreferrer"></a>
+      <span class="actions">
+        <button class="btn del small" data-action="delete-resource" title="Supprimer la ressource">×</button>
+      </span>
     `;
-    
-    // Animation d'entrée
-    li.style.opacity = '0';
-    li.style.transform = 'translateX(-20px)';
-    setTimeout(() => {
-      li.style.transition = 'all 0.3s ease';
-      li.style.opacity = '1';
-      li.style.transform = 'translateX(0)';
-    }, 10);
-    
+
+    const a = li.querySelector('a');
+    a.textContent = title?.trim() || 'Ressource';
+    a.href = safeUrl;
+
     return li;
   }
 
-  // Gestion des événements
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('button[data-action]');
-    if (!btn) return;
+    if(!btn) return;
 
     const action = btn.getAttribute('data-action');
 
-    // Ajouter une rubrique (subblock)
-    if (action === 'add-subblock') {
+    // Ajouter une rubrique (au niveau bloc)
+    if(action === 'add-subblock'){
       const block = btn.closest('.block');
-      if (!block) return;
-      
-      openModal('Nouvelle rubrique', () => {
-        const label = document.getElementById('inputTitle').value.trim();
-        if (!label) {
-          alert('Veuillez saisir un nom de rubrique');
-          return;
-        }
-        
-        const container = block.querySelector('.subblocks');
-        container.appendChild(createSubblock(label));
-        closeModal();
-      });
+      if(!block) return;
+      const container = block.querySelector('.subblocks');
+      const label = window.prompt('Nom de la nouvelle rubrique :');
+      if(!label || !label.trim()) return;
+      container.appendChild(createSubblock(label.trim()));
       return;
     }
 
     // Supprimer une rubrique
-    if (action === 'delete-subblock') {
+    if(action === 'delete-subblock'){
       const sub = btn.closest('[data-subblock]');
-      if (!sub) return;
-      
-      if (confirm('Supprimer cette rubrique et toutes ses ressources ?')) {
-        sub.style.opacity = '0';
-        sub.style.transform = 'translateX(-30px)';
-        setTimeout(() => sub.remove(), 300);
-      }
+      if(!sub) return;
+      const ok = window.confirm('Supprimer cette rubrique ?');
+      if(!ok) return;
+      sub.remove();
       return;
     }
 
-    // Ajouter une ressource
-    if (action === 'add-resource') {
+    // Ajouter une ressource (au niveau rubrique)
+    if(action === 'add-resource'){
       const sub = btn.closest('[data-subblock]');
-      if (!sub) return;
-      
-      openModal('Nouvelle ressource', () => {
-        const title = document.getElementById('inputTitle').value.trim();
-        const url = document.getElementById('inputUrl').value.trim() || '#';
-        
-        if (!title) {
-          alert('Veuillez saisir un titre');
-          return;
-        }
-        
-        const list = sub.querySelector('.resources');
-        
-        // Supprimer l'état vide s'il existe
-        const emptyState = list.querySelector('.empty-state');
-        if (emptyState) emptyState.remove();
-        
-        list.appendChild(createResourceItem(title, url));
-        closeModal();
-      });
+      if(!sub) return;
+      const title = window.prompt('Titre de la ressource (ex. Procédure PDF, Lien, Modèle...) :');
+      if(!title || !title.trim()) return;
+      const url = window.prompt('Lien URL (ou laisser vide si non disponible) :') || '#';
+      const list = sub.querySelector('.resources');
+      list.appendChild(createResourceItem(title.trim(), url));
       return;
     }
 
     // Supprimer une ressource
-    if (action === 'delete-resource') {
-      const li = btn.closest('.resource-item');
-      if (!li) return;
-      
-      li.style.opacity = '0';
-      li.style.transform = 'translateX(-30px)';
-      setTimeout(() => {
-        const list = li.parentElement;
-        li.remove();
-        
-        // Ajouter un état vide si la liste est vide
-        if (list.children.length === 0) {
-          const empty = document.createElement('div');
-          empty.className = 'empty-state';
-          empty.textContent = 'Aucune ressource pour le moment';
-          list.appendChild(empty);
-        }
-      }, 300);
+    if(action === 'delete-resource'){
+      const li = btn.closest('li');
+      if(!li) return;
+      li.remove();
       return;
     }
-  });
-
-  // Fonction de recherche
-  document.getElementById('searchInput').addEventListener('input', (e) => {
-    const query = e.target.value.toLowerCase();
-    const blocks = document.querySelectorAll('.block');
-    
-    blocks.forEach(block => {
-      const subblocks = block.querySelectorAll('.subblock');
-      let blockVisible = false;
-      
-      subblocks.forEach(sub => {
-        const label = sub.querySelector('.subblock-label').textContent.toLowerCase();
-        const resources = Array.from(sub.querySelectorAll('.resource-item a'));
-        
-        const matchLabel = label.includes(query);
-        const matchResource = resources.some(r => r.textContent.toLowerCase().includes(query));
-        
-        if (query === '' || matchLabel || matchResource) {
-          sub.style.display = '';
-          blockVisible = true;
-        } else {
-          sub.style.display = 'none';
-        }
-      });
-      
-      // Cacher le bloc entier si aucune correspondance
-      block.style.display = blockVisible || query === '' ? '' : 'none';
-    });
-  });
-
-  // Animation au chargement
-  window.addEventListener('load', () => {
-    const blocks = document.querySelectorAll('.block');
-    blocks.forEach((block, index) => {
-      block.style.animationDelay = `${index * 0.05}s`;
-    });
   });
 </script>
 
