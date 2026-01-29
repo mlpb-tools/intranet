@@ -66,16 +66,18 @@
     }
 
     .block{
-      background:var(--card);
+      /* fond coloré par classe .c-xxx (voir règles en bas) */
       border-radius:16px;
       padding: 0.9rem 0.9rem 0.8rem;
       box-shadow: 0 3px 10px rgba(0,0,0,0.07);
-      transition: transform .18s ease, box-shadow .18s ease;
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+      color:#111; /* écriture noire */
     }
 
     .block:hover{
       transform: translateY(-3px);
       box-shadow: 0 10px 26px rgba(0,0,0,0.12);
+      filter: brightness(0.98);
     }
 
     .block-head{
@@ -83,7 +85,9 @@
       align-items:center;
       justify-content:space-between;
       gap:0.75rem;
-      margin-bottom: 0.9rem;
+      margin-bottom: 0;
+      cursor:pointer; /* bloc cliquable */
+      user-select:none;
     }
 
     .block h2{
@@ -94,14 +98,18 @@
 
     .block-meta{
       font-size:0.74rem;
-      color:var(--muted);
+      color:#111;
+      opacity:0.78;
       margin-top:0.15rem;
     }
 
     .subblocks{
-      display:grid;
+      display:none; /* vue compacte par défaut */
       gap: 0.6rem;
+      margin-top: 0.8rem;
     }
+
+    .block.open .subblocks{ display:grid; }
 
     .subblock{
       background: var(--light);
@@ -186,8 +194,8 @@
       align-items:center;
       gap:0.35rem;
       font-size:0.78rem;
-      color: var(--muted);
-      background: rgba(0,0,0,0.04);
+      color:#111;
+      background: rgba(255,255,255,0.35);
       border-radius: 999px;
       padding: 0.25rem 0.55rem;
       white-space: nowrap;
@@ -202,13 +210,49 @@
     }
 
     /* Couleurs par bloc (une couleur = un bloc) */
-    .c-orange h2 { color: var(--ml-orange); }
-    .c-blue h2 { color: var(--ml-blue); }
-    .c-green h2 { color: var(--ml-green); }
-    .c-purple h2 { color: var(--ml-purple); }
-    .c-red h2 { color: var(--ml-red); }
-    .c-yellow h2 { color: var(--ml-yellow); }
-    .c-teal h2 { color: var(--ml-teal); }
+    /* Couleurs par bloc – calque site public */
+    .c-orange { background: var(--ml-orange); }
+    .c-blue { background: var(--ml-blue); }
+    .c-green { background: var(--ml-green); }
+    .c-purple { background: var(--ml-purple); }
+    .c-red { background: var(--ml-red); }
+    .c-yellow { background: var(--ml-yellow); }
+    .c-teal { background: var(--ml-teal); }
+
+    .block h2,
+    .block .block-meta,
+    .block .label,
+    .block .pill { color:#000; }
+
+    .subblocks{ display:none; }
+    .block.open .subblocks{ display:grid; }
+  
+    /* Couleurs par bloc : fond coloré (calque site web) */
+    .c-orange { background: var(--ml-orange); }
+    .c-blue   { background: var(--ml-blue); }
+    .c-green  { background: var(--ml-green); }
+    .c-purple { background: var(--ml-purple); }
+    .c-red    { background: var(--ml-red); }
+    .c-yellow { background: var(--ml-yellow); }
+    .c-teal   { background: var(--ml-teal); }
+
+    /* Titres / textes en noir (demandé) */
+    .block h2{ color:#111; }
+
+    /* Indicateur d'ouverture */
+    .toggle{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.35);
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .block.open .toggle{ transform: rotate(180deg); }
   </style>
 </head>
 
@@ -232,13 +276,13 @@
 
     <!-- ACTUALITÉS INTERNES -->
     <section class="block c-blue" data-block="actualites">
-      <div class="block-head">
+      <div class="block-head" data-toggle="block">
         <div>
           <h2>Actualités internes</h2>
           <div class="block-meta">Infos Direction • Événements • Notes</div>
         </div>
         <div class="actions">
-          <span class="pill">Rubrique</span>
+          <span class="pill">Rubrique</span><span class="toggle" aria-hidden="true">▾</span>
           <button class="btn add" data-action="add-subblock" title="Ajouter une rubrique">＋</button>
         </div>
       </div>
@@ -281,7 +325,7 @@
 
     <!-- INSTITUTION & GOUVERNANCE -->
     <section class="block c-orange" data-block="institution">
-      <div class="block-head">
+      <div class="block-head" data-toggle="block">
         <div>
           <h2>Institution & gouvernance</h2>
           <div class="block-meta">CCN • RH • Réseau ARML/UNML</div>
@@ -341,13 +385,13 @@
 
     <!-- ACCUEIL & ACCOMPAGNEMENT -->
     <section class="block c-green" data-block="accueil">
-      <div class="block-head">
+      <div class="block-head" data-toggle="block">
         <div>
           <h2>Accueil & accompagnement</h2>
           <div class="block-meta">Process cœur de métier</div>
         </div>
         <div class="actions">
-          <span class="pill">Process</span>
+          <span class="pill">Process</span><span class="toggle" aria-hidden="true">▾</span>
           <button class="btn add" data-action="add-subblock">＋</button>
         </div>
       </div>
@@ -401,7 +445,7 @@
 
     <!-- RESSOURCES THÉMATIQUES -->
     <section class="block c-purple" data-block="thematiques">
-      <div class="block-head">
+      <div class="block-head" data-toggle="block">
         <div>
           <h2>Ressources thématiques</h2>
           <div class="block-meta">7 univers (calque site public) – contenus internes</div>
@@ -467,13 +511,13 @@
 
     <!-- TERRITOIRES -->
     <section class="block c-yellow" data-block="territoires">
-      <div class="block-head">
+      <div class="block-head" data-toggle="block">
         <div>
           <h2>Territoires</h2>
           <div class="block-meta">BAB Nord • BAB Sud • Sud PB • PBI</div>
         </div>
         <div class="actions">
-          <span class="pill">Territoire</span>
+          <span class="pill">Territoire</span><span class="toggle" aria-hidden="true">▾</span>
           <button class="btn add" data-action="add-subblock">＋</button>
         </div>
       </div>
@@ -512,13 +556,13 @@
 
     <!-- OUTILS QUOTIDIENS -->
     <section class="block c-teal" data-block="outils">
-      <div class="block-head">
+      <div class="block-head" data-toggle="block">
         <div>
           <h2>Outils quotidiens</h2>
           <div class="block-meta">Accès rapide aux outils de travail</div>
         </div>
         <div class="actions">
-          <span class="pill">Outil</span>
+          <span class="pill">Outil</span><span class="toggle" aria-hidden="true">▾</span>
           <button class="btn add" data-action="add-subblock">＋</button>
         </div>
       </div>
@@ -550,7 +594,7 @@
 
     <!-- FORMATION & PROFESSIONNALISATION -->
     <section class="block c-red" data-block="formationpro">
-      <div class="block-head">
+      <div class="block-head" data-toggle="block">
         <div>
           <h2>Formation & professionnalisation</h2>
           <div class="block-meta">Montée en compétences & ressources</div>
@@ -588,13 +632,13 @@
 
     <!-- PROJETS STRUCTURANTS -->
     <section class="block c-green" data-block="projets">
-      <div class="block-head">
+      <div class="block-head" data-toggle="block">
         <div>
           <h2>Projets structurants</h2>
           <div class="block-meta">ERIP • BETI LAN • Europe • Transfrontalier</div>
         </div>
         <div class="actions">
-          <span class="pill">Projet</span>
+          <span class="pill">Projet</span><span class="toggle" aria-hidden="true">▾</span>
           <button class="btn add" data-action="add-subblock">＋</button>
         </div>
       </div>
@@ -625,6 +669,20 @@
 <footer>© Mission Locale Pays Basque – Intranet interne</footer>
 
 <script>
+  // Vue compacte : les blocs sont repliés par défaut.
+  // Clic sur l'en-tête du bloc => affiche/masque les sous-blocs.
+  // (Les boutons + / × ne déclenchent pas l'ouverture.)
+
+  document.addEventListener('click', (e) => {
+    const head = e.target.closest('.block-head');
+    if(!head) return;
+    if(e.target.closest('button')) return; // ne pas toggler quand on clique sur un bouton
+
+    const block = head.closest('.block');
+    if(!block) return;
+    block.classList.toggle('open');
+  });
+
   // Prototype « agile » :
   // - + sur un bloc : ajoute une rubrique (subblock)
   // - + sur une rubrique : ajoute une ressource (lien)
