@@ -5,596 +5,669 @@
   <title>Intranet – Mission Locale Pays Basque</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Oswald:wght@400;500;600&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --black:  #0d0d0d;
-      --white:  #ffffff;
-      --bg:     #f0ede8;
-      --border: 3px solid #0d0d0d;
-      --shadow: 5px 5px 0 #0d0d0d;
-      --shadow-lg: 7px 7px 0 #0d0d0d;
-
-      /* couleurs MLPB */
+      --black:    #111111;
+      --white:    #ffffff;
+      --bg:       #edeae4;
       --c-orange: #f39200;
-      --c-bleu:   #2897d5;
       --c-vert:   #95c11f;
+      --c-bleu:   #2897d5;
       --c-rose:   #d60b52;
-      --c-violet: #7b4fa3;
-      --c-rouge:  #c0392b;
-      --c-teal:   #1aab9b;
-      --c-jaune:  #e6b800;
+      --c-violet: #a3195b;
+      --c-brique: #9f3d3f;
+      --c-teal:   #0e8f7d;
+      --c-indigo: #2c4ea3;
+      --font-title: 'Montserrat', 'Arial Narrow', sans-serif;
+      --font-body:  'Montserrat', Arial, sans-serif;
+      --font-data:  'Oswald', 'Roboto Condensed', sans-serif;
+      --hdr: 56px;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: var(--bg);
-      color: var(--black);
-      min-height: 100vh;
+    html, body {
+      height: 100%; overflow: hidden;
+      font-family: var(--font-body);
+      background: var(--bg); color: var(--black);
     }
+    body { display: flex; flex-direction: column; }
 
-    /* ══ HEADER ══ */
+    /* ═══ HEADER ═══ */
     header {
+      flex-shrink: 0;
+      height: var(--hdr);
       background: var(--black);
-      border-bottom: var(--border);
-      padding: 0 2.2rem;
-      position: sticky; top: 0; z-index: 200;
-    }
-    .header-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      height: 72px; gap: 1.5rem;
+      border-bottom: 2.5px solid var(--black);
+      padding: 0 1.4rem;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 1rem;
+      z-index: 300;
     }
     .header-brand { display: flex; align-items: center; gap: 1.1rem; }
     .header-logo-wrap {
-      background: var(--white);
-      padding: 5px 10px;
+      background: var(--white); padding: 6px 14px;
       display: flex; align-items: center;
-      border: 2px solid rgba(255,255,255,0.15);
+      height: 44px; flex-shrink: 0;
+      border-radius: 8px;
     }
-    .header-logo  { height: 38px; width: auto; display: block; }
-    .header-sep   { width: 2px; height: 32px; background: rgba(255,255,255,0.2); }
-    .header-wordmark {
-      display: flex; align-items: baseline; gap: 0.55rem; flex-wrap: nowrap;
-    }
+    .header-logo { height: 32px; width: auto; display: block; }
+    .header-sep { width: 2px; height: 30px; background: rgba(255,255,255,0.18); }
+    .header-wordmark { display: flex; flex-direction: column; gap: 1px; }
     .header-main-title {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900; font-size: 1.15rem;
-      color: var(--white); letter-spacing: -0.5px;
-      text-transform: uppercase;
+      font-family: var(--font-title); font-weight: 900;
+      font-size: 1.05rem; color: var(--white);
+      letter-spacing: -0.4px; text-transform: uppercase; line-height: 1;
     }
-    .header-dash { color: var(--c-orange); font-weight: 900; font-size: 1.15rem; }
     .header-subtitle {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700; font-size: 1.05rem;
-      color: var(--c-orange); letter-spacing: -0.3px;
-      text-transform: uppercase;
+      font-family: var(--font-data); font-size: 0.72rem;
+      color: var(--c-orange); letter-spacing: 1.5px; text-transform: uppercase;
     }
-    .header-badge {
-      font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 500;
-      color: var(--black); background: var(--c-orange);
-      border: var(--border); padding: 0.3rem 0.75rem; letter-spacing: 0.5px;
-      white-space: nowrap; flex-shrink: 0;
+    .header-right { display: flex; align-items: center; gap: 0.6rem; }
+    .badge-year {
+      font-family: var(--font-data); font-size: 0.7rem;
+      background: var(--c-orange); color: var(--black);
+      border: 2px solid var(--black); padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      letter-spacing: 1px; white-space: nowrap;
     }
+    .btn-save {
+      font-family: var(--font-data); font-weight: 600;
+      font-size: 0.82rem; letter-spacing: 1px; text-transform: uppercase;
+      background: var(--c-vert); color: var(--black);
+      border: 2px solid var(--black);
+      box-shadow: 3px 3px 0 var(--black);
+      padding: 0.42rem 1.1rem; cursor: pointer;
+      display: flex; align-items: center; gap: 0.45rem;
+      border-radius: 8px;
+    }
+    .btn-save:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--black); }
+    .btn-save:active { transform: translate(1px,1px); box-shadow: 1px 1px 0 var(--black); }
+    .btn-reset {
+      font-family: var(--font-data); font-size: 0.7rem; font-weight: 500;
+      color: rgba(255,255,255,0.45); background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.18);
+      border-radius: 6px;
+      padding: 0.38rem 0.75rem; cursor: pointer;
+      transition: background .12s, color .12s; white-space: nowrap;
+    }
+    .btn-reset:hover { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.75); }
 
+    /* ═══ TOAST ═══ */
+    #toast {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9999;
+      font-family: var(--font-data); font-size: 0.82rem; font-weight: 500;
+      letter-spacing: 0.5px; text-transform: uppercase;
+      background: var(--black); color: var(--white);
+      border: 2px solid var(--black);
+      box-shadow: 4px 4px 0 var(--c-vert);
+      border-radius: 10px;
+      padding: 0.6rem 1.2rem;
+      transform: translateY(120%); opacity: 0;
+      transition: transform .3s cubic-bezier(.34,1.56,.64,1), opacity .3s;
+    }
+    #toast.show { transform: translateY(0); opacity: 1; }
+    #toast.error { box-shadow: 4px 4px 0 var(--c-rose); }
 
-    /* ══ LAYOUT ══ */
-    .container { max-width: 1520px; margin: 0 auto; padding: 2rem 2.2rem 3rem; }
+    /* ═══ MAIN AREA ═══ */
+    .page-body {
+      flex: 1; overflow: hidden;
+      display: flex; flex-direction: column;
+      padding: 0.6rem 1rem 0.6rem;
+      gap: 0.5rem;
+    }
 
     .section-label {
-      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      flex-shrink: 0;
+      font-family: var(--font-data); font-size: 0.6rem;
       letter-spacing: 2.5px; text-transform: uppercase;
-      color: rgba(13,13,13,0.4); margin-bottom: 1rem;
-      display: flex; align-items: center; gap: 0.7rem;
+      color: var(--black);
+      display: flex; align-items: center; gap: 0.8rem;
     }
-    .section-label::after { content: ''; flex: 1; height: 1px; background: rgba(13,13,13,0.13); }
+    .section-label::after { content:''; flex:1; height:1px; background: rgba(17,17,17,0.1); }
 
+    /* ═══ GRID: 4×2 fills remaining height ═══ */
     .grid {
+      flex: 1; overflow: hidden;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 0.65rem;
     }
 
-    /* ══ BLOCK ══ */
+    /* ═══ BLOCK ═══ */
     .block {
-      border: var(--border);
-      box-shadow: var(--shadow);
-      transition: transform .18s ease, box-shadow .18s ease;
-      position: relative;
+      border: 2px solid var(--black);
+      border-radius: 14px;
+      box-shadow: 3px 3px 0 var(--black);
+      display: flex; flex-direction: column;
+      overflow: hidden;
+      transition: box-shadow .15s;
     }
-    .block:hover { transform: translate(-3px,-3px); box-shadow: var(--shadow-lg); }
+    .block:hover { box-shadow: 5px 5px 0 var(--black); }
 
-    /* couleurs complètes par bloc */
-    .block.c-blue   { background: var(--c-bleu); }
+    .block.c-bleu   { background: var(--c-bleu); }
     .block.c-orange { background: var(--c-orange); }
-    .block.c-green  { background: var(--c-vert); }
-    .block.c-purple { background: var(--c-violet); }
-    .block.c-yellow { background: var(--c-jaune); }
-    .block.c-teal   { background: var(--c-teal); }
-    .block.c-red    { background: var(--c-rouge); }
+    .block.c-vert   { background: var(--c-vert); }
+    .block.c-violet { background: var(--c-violet); }
+    .block.c-brique { background: var(--c-brique); }
     .block.c-rose   { background: var(--c-rose); }
+    .block.c-teal   { background: var(--c-teal); }
+    .block.c-indigo { background: var(--c-indigo); }
+
+    /* text contrast */
+    .block.c-bleu   *:not(.subblock *), .block.c-violet *:not(.subblock *),
+    .block.c-brique *:not(.subblock *), .block.c-rose   *:not(.subblock *),
+    .block.c-teal   *:not(.subblock *), .block.c-indigo *:not(.subblock *) { color: var(--white); }
+    .block.c-orange *:not(.subblock *),
+    .block.c-vert   *:not(.subblock *) { color: var(--black); }
 
     /* ── BLOCK HEAD ── */
     .block-head {
-      padding: 1.2rem 1.2rem 1rem;
-      display: flex; align-items: flex-start;
-      justify-content: space-between; gap: 0.75rem;
-      cursor: pointer; user-select: none;
-      border-bottom: 2px solid rgba(0,0,0,0.15);
+      flex-shrink: 0;
+      padding: 0.55rem 0.75rem 0.45rem;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 0.5rem;
+      border-bottom: 1.5px solid rgba(0,0,0,0.14);
     }
-    .head-text { flex: 1; }
+    .head-left { flex: 1; min-width: 0; }
     .block h2 {
-      font-size: 0.92rem; font-weight: 900;
-      text-transform: uppercase; letter-spacing: -0.3px;
-      line-height: 1.15; margin: 0;
-    }
-    .block-meta {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.63rem; margin-top: 4px; opacity: 0.65;
+      font-family: var(--font-title);
+      font-size: 0.75rem; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 0.1px;
+      line-height: 1.2;
     }
 
-    /* text color: white on dark blocks, black on light */
-    .block.c-blue   h2, .block.c-blue   .block-meta,
-    .block.c-purple h2, .block.c-purple .block-meta,
-    .block.c-teal   h2, .block.c-teal   .block-meta,
-    .block.c-red    h2, .block.c-red    .block-meta,
-    .block.c-rose   h2, .block.c-rose   .block-meta { color: var(--white); }
+    .head-right { display: flex; align-items: center; gap: 0.3rem; flex-shrink: 0; }
 
-    .block.c-orange h2, .block.c-orange .block-meta,
-    .block.c-green  h2, .block.c-green  .block-meta,
-    .block.c-yellow h2, .block.c-yellow .block-meta { color: var(--black); }
-
-    .head-actions {
-      display: flex; align-items: center; gap: 0.4rem;
-      flex-shrink: 0; padding-top: 1px;
-    }
     .pill {
-      font-family: 'DM Mono', monospace; font-size: 0.6rem;
+      font-family: var(--font-data); font-size: 0.55rem;
       letter-spacing: 0.8px; text-transform: uppercase;
-      padding: 0.22rem 0.55rem;
-      border: 1.5px solid rgba(0,0,0,0.22);
-      background: rgba(0,0,0,0.1); white-space: nowrap;
-    }
-    /* white pill on dark */
-    .block.c-blue   .pill, .block.c-purple .pill,
-    .block.c-teal   .pill, .block.c-red    .pill, .block.c-rose .pill {
-      border-color: rgba(255,255,255,0.35);
-      background: rgba(255,255,255,0.15); color: var(--white);
-    }
-    .toggle {
-      width: 26px; height: 26px;
-      border: 1.5px solid rgba(0,0,0,0.22); background: rgba(0,0,0,0.1);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.85rem; line-height: 1;
-      transition: transform 0.25s; font-weight: 800; cursor: pointer;
-    }
-    .block.c-blue   .toggle, .block.c-purple .toggle,
-    .block.c-teal   .toggle, .block.c-red    .toggle, .block.c-rose .toggle {
-      border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.15); color: var(--white);
-    }
-    .block.open .toggle { transform: rotate(180deg); }
-
-    .btn.add {
-      border: 1.5px solid rgba(0,0,0,0.22); background: rgba(0,0,0,0.1);
-      width: 26px; height: 26px; padding: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; font-weight: 700; cursor: pointer;
-      transition: background .15s; line-height: 1;
-    }
-    .btn.add:hover { background: rgba(0,0,0,0.22); }
-    .block.c-blue   .btn.add:not(.small),
-    .block.c-purple .btn.add:not(.small),
-    .block.c-teal   .btn.add:not(.small),
-    .block.c-red    .btn.add:not(.small),
-    .block.c-rose   .btn.add:not(.small) {
-      border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.15); color: var(--white);
-    }
-    .block.c-blue   .btn.add:not(.small):hover,
-    .block.c-purple .btn.add:not(.small):hover,
-    .block.c-teal   .btn.add:not(.small):hover,
-    .block.c-red    .btn.add:not(.small):hover,
-    .block.c-rose   .btn.add:not(.small):hover { background: rgba(255,255,255,0.3); }
-
-    /* ── SUMMARY (closed) ── */
-    .block-summary {
-      padding: 0.55rem 1.2rem 0.85rem;
-      display: flex; gap: 0.38rem; flex-wrap: wrap;
-    }
-    .block.open .block-summary { display: none; }
-    .stag {
-      font-family: 'DM Mono', monospace; font-size: 0.6rem;
-      padding: 0.18rem 0.5rem;
+      padding: 0.18rem 0.45rem;
       border: 1.5px solid rgba(0,0,0,0.18);
-      background: rgba(0,0,0,0.08); color: inherit;
+      border-radius: 20px;
     }
-    .block.c-blue   .stag, .block.c-purple .stag,
-    .block.c-teal   .stag, .block.c-red    .stag, .block.c-rose .stag {
-      border-color: rgba(255,255,255,0.28); background: rgba(255,255,255,0.1); color: var(--white);
+    .block.c-bleu .pill, .block.c-violet .pill,
+    .block.c-brique .pill, .block.c-rose .pill,
+    .block.c-teal .pill, .block.c-indigo .pill {
+      border-color: rgba(255,255,255,0.28);
+      background: rgba(255,255,255,0.14); color: var(--white);
     }
 
-    /* ── SUBBLOCKS ── */
-    .subblocks { display: none; flex-direction: column; gap: 0.5rem; padding: 0.8rem 1rem 1rem; }
-    .block.open .subblocks { display: flex; }
+    .btn-add-block {
+      font-family: var(--font-data); font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.6px; text-transform: uppercase;
+      height: 24px; padding: 0 0.55rem;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.2); color: inherit;
+      cursor: pointer; display: flex; align-items: center; gap: 0.2rem;
+      border-radius: 6px;
+    }
+    .btn-add-block:hover { background: rgba(255,255,255,0.38); }
+    .block.c-orange .btn-add-block, .block.c-vert .btn-add-block {
+      border-color: rgba(0,0,0,0.18); background: rgba(0,0,0,0.1);
+    }
+    .block.c-orange .btn-add-block:hover, .block.c-vert .btn-add-block:hover {
+      background: rgba(0,0,0,0.2);
+    }
+
+    /* ── SUBBLOCKS ── always visible, scrollable ── */
+    .subblocks {
+      flex: 1; overflow-y: auto;
+      display: flex; flex-direction: column;
+      gap: 0.3rem; padding: 0.4rem 0.5rem 0.5rem;
+    }
+    /* custom scrollbar */
+    .subblocks::-webkit-scrollbar { width: 4px; }
+    .subblocks::-webkit-scrollbar-track { background: rgba(0,0,0,0.06); }
+    .subblocks::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.25); }
 
     .subblock {
-      background: rgba(255,255,255,0.92);
-      border: 2px solid var(--black);
-      padding: 0.6rem 0.7rem 0.55rem;
-      color: var(--black);
+      background: rgba(255,255,255,0.4);
+      border: 1.5px solid rgba(0,0,0,0.3);
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
     }
     .subrow {
       display: flex; align-items: center;
-      justify-content: space-between; gap: 0.5rem;
+      justify-content: space-between; gap: 0.25rem;
+      padding: 0.18rem 0.35rem;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
     }
     .label {
-      font-size: 0.78rem; font-weight: 800;
-      text-transform: uppercase; letter-spacing: -0.2px;
+      font-family: var(--font-title);
+      font-size: 0.65rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: -0.1px;
       line-height: 1.2; color: var(--black);
     }
-    .actions { display: flex; align-items: center; gap: 0.3rem; flex-shrink: 0; }
+    .sub-actions { display: flex; align-items: center; gap: 0.2rem; flex-shrink: 0; }
 
-    /* small btns inside subblock */
-    .btn.small {
-      border: 1.5px solid var(--black); background: transparent;
-      width: 22px; height: 22px; padding: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.78rem; font-weight: 800;
-      cursor: pointer; transition: background .12s; line-height: 1;
+    .btn-add-res {
+      font-family: var(--font-data); font-size: 0.48rem; font-weight: 600;
+      letter-spacing: 0.4px; text-transform: uppercase;
+      background: #d4f5d4; color: #145214;
+      border: 1px solid #145214;
+      height: 16px; padding: 0 0.35rem;
+      display: flex; align-items: center; gap: 0.15rem;
+      border-radius: 4px;
+      cursor: pointer; transition: background .12s; white-space: nowrap;
     }
-    .btn.add.small { background: #d4f5d4; color: #166534; border-color: #166534; }
-    .btn.add.small:hover { background: #bbf7d0; }
-    .btn.del.small { background: #fee2e2; color: #991b1b; border-color: #991b1b; }
-    .btn.del.small:hover { background: #fecaca; }
+    .btn-add-res:hover { background: #a8eaa8; }
+    .btn-del-sub {
+      font-family: var(--font-data); font-size: 0.48rem; font-weight: 600;
+      letter-spacing: 0.3px;
+      background: #fee2e2; color: #8b1a1a;
+      border: 1px solid #8b1a1a;
+      height: 16px; padding: 0 0.32rem;
+      display: flex; align-items: center;
+      border-radius: 4px;
+      cursor: pointer; transition: background .12s; white-space: nowrap;
+    }
+    .btn-del-sub:hover { background: #fca5a5; }
 
     /* ── RESOURCES ── */
-    .resources {
-      list-style: none; display: flex; flex-direction: column;
-      gap: 0.25rem; margin-top: 0.42rem;
+    .resources { list-style: none; }
+    .resources li { display: flex; align-items: stretch; border-bottom: 1px solid rgba(0,0,0,0.05); }
+    .resources li:last-child { border-bottom: none; }
+    .res-link-wrap {
+      flex: 1; display: flex; align-items: center;
+      padding: 0.18rem 0.35rem; gap: 0.25rem; overflow: hidden;
     }
-    .resources li {
-      display: flex; align-items: center; justify-content: space-between; gap: 0.4rem;
-      background: var(--bg); border: 1.5px solid rgba(0,0,0,0.13);
-      padding: 0.3rem 0.45rem;
-    }
+    .res-icon { font-size: 0.52rem; flex-shrink: 0; }
     .resources a {
-      color: var(--c-bleu); font-size: 0.73rem; font-weight: 600;
+      color: #1559a8; font-family: var(--font-body);
+      font-size: 0.52rem; font-weight: 600;
       text-decoration: none; overflow: hidden;
       text-overflow: ellipsis; white-space: nowrap;
-      max-width: 200px; font-family: 'DM Mono', monospace;
     }
     .resources a:hover { text-decoration: underline; }
-
-    /* ══ FOOTER ══ */
-    footer {
-      border-top: var(--border); background: var(--black);
-      color: rgba(255,255,255,0.38); text-align: center;
-      padding: 1.2rem; font-family: 'DM Mono', monospace;
-      font-size: 0.65rem; letter-spacing: 0.5px; margin-top: 2rem;
+    .res-del {
+      width: 20px; flex-shrink: 0;
+      background: transparent; border: none;
+      border-left: 1px solid rgba(0,0,0,0.06);
+      color: #cc3333; font-size: 0.65rem; font-weight: 800;
+      cursor: pointer; transition: background .1s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .res-del:hover { background: #fef2f2; }
+    .empty-res {
+      font-family: var(--font-data); font-size: 0.42rem;
+      color: var(--black); padding: 0.2rem 0.35rem;
+      font-style: italic; display: block;
     }
 
-    @media (max-width: 900px)  { .grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 560px)  { .grid { grid-template-columns: 1fr; } .container { padding: 1rem; } }
+    /* ═══ MODAL ═══ */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.52); z-index: 500;
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--white);
+      border: 3px solid var(--black);
+      border-radius: 16px;
+      box-shadow: 8px 8px 0 var(--black);
+      width: min(440px, 92vw); padding: 1.8rem;
+    }
+    .modal h3 {
+      font-family: var(--font-title); font-weight: 900;
+      font-size: 1rem; text-transform: uppercase;
+      letter-spacing: -0.2px; margin-bottom: 1.2rem;
+    }
+    .modal label {
+      font-family: var(--font-data); font-size: 0.68rem;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: rgba(0,0,0,0.5); display: block;
+      margin-bottom: 0.3rem; margin-top: 0.9rem;
+    }
+    .modal label:first-of-type { margin-top: 0; }
+    .modal input {
+      font-family: var(--font-body); font-size: 0.9rem; font-weight: 600;
+      width: 100%; padding: 0.6rem 0.75rem;
+      border: 2px solid var(--black);
+      background: var(--bg); color: var(--black);
+      border-radius: 8px;
+      outline: none; transition: border-color .15s;
+    }
+    .modal input:focus { border-color: var(--c-bleu); }
+    .modal-actions { display: flex; gap: 0.55rem; margin-top: 1.4rem; }
+    .btn-confirm {
+      font-family: var(--font-data); font-weight: 600; font-size: 0.85rem;
+      letter-spacing: 1px; text-transform: uppercase;
+      background: var(--black); color: var(--white);
+      border: 2px solid var(--black); box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+      border-radius: 8px;
+      padding: 0.55rem 1.2rem; cursor: pointer; flex: 1;
+    }
+    .btn-confirm:hover { background: #2c2c2c; }
+    .btn-cancel {
+      font-family: var(--font-data); font-weight: 600; font-size: 0.85rem;
+      letter-spacing: 1px; text-transform: uppercase;
+      background: transparent; color: var(--black);
+      border-radius: 8px;
+      border: 2px solid rgba(0,0,0,0.22); padding: 0.55rem 1.1rem; cursor: pointer;
+    }
+    .btn-cancel:hover { border-color: var(--black); }
+
+    footer {
+      flex-shrink: 0;
+      background: var(--black); border-top: 2px solid var(--black);
+      color: rgba(255,255,255,0.25); text-align: center;
+      padding: 0.45rem; font-family: var(--font-data);
+      font-size: 0.6rem; letter-spacing: 1px;
+    }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 1100px) {
+      .grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(4, 1fr); }
+      html, body { overflow: auto; height: auto; }
+      .page-body { overflow: visible; }
+      .grid { height: auto; }
+      .block { min-height: 220px; }
+    }
+    @media (max-width: 580px) {
+      .grid { grid-template-columns: 1fr; grid-template-rows: none; }
+      .page-body { padding: 0.5rem; }
+      .badge-year, .btn-reset { display: none; }
+    }
   </style>
 </head>
 <body>
 
-<!-- HEADER BAND -->
+<!-- HEADER -->
 <header>
-  <div class="header-inner">
-    <div class="header-brand">
-      <div class="header-logo-wrap"><img src="https://static.wixstatic.com/media/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif/v1/fill/w_224,h_60,al_c,q_80,enc_avif,quality_auto/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif" alt="Mission Locale Pays Basque" class="header-logo"/></div>
-      <div class="header-sep"></div>
-      <div class="header-wordmark">
-        <span class="header-main-title">Intranet MLPB</span>
-        <span class="header-dash">—</span>
-        <span class="header-subtitle">Ressources &amp; Outils</span>
-      </div>
+  <div class="header-brand">
+    <div class="header-logo-wrap">
+      <img src="https://static.wixstatic.com/media/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif/v1/fill/w_224,h_60,al_c,q_80,enc_avif,quality_auto/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif" alt="Mission Locale Pays Basque" class="header-logo"/>
     </div>
-    <span class="header-badge">2025 – 2026</span>
+    <div class="header-sep"></div>
+    <div class="header-wordmark">
+      <span class="header-main-title">Intranet MLPB</span>
+      <span class="header-subtitle">Ressources &amp; Outils professionnels</span>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="badge-year">2025 – 2026</span>
+    <button class="btn-reset" id="btn-reset">Réinitialiser</button>
+    <button class="btn-save" id="btn-save">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 2h9l3 3v9H2V2z" stroke="currentColor" stroke-width="1.8" fill="none"/><rect x="5" y="2" width="5" height="4" stroke="currentColor" stroke-width="1.5" fill="none"/><rect x="3.5" y="9" width="9" height="4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+      Sauvegarder
+    </button>
   </div>
 </header>
 
-<!-- GRILLE -->
-<div class="container">
-  <div class="section-label">Prototype agile · Ajouter / supprimer des rubriques et des ressources par bloc</div>
+<!-- MAIN -->
+<div class="page-body">
   <div class="grid" id="grid">
 
-    <!-- ACTUALITÉS INTERNES -->
-    <section class="block c-blue" data-block="actualites">
-      <div class="block-head" data-toggle="block">
-        <div class="head-text">
-          <h2>Actualités internes</h2>
-          <div class="block-meta">Infos Direction · Événements · Notes</div>
-        </div>
-        <div class="head-actions">
-          <span class="pill">Rubrique</span>
-          <span class="toggle" aria-hidden="true">▾</span>
-          <button class="btn add" data-action="add-subblock">＋</button>
-        </div>
-      </div>
-      <div class="block-summary">
-        <span class="stag">Infos Direction & CODIR</span>
-        <span class="stag">Événements internes</span>
-        <span class="stag">Notes internes</span>
+    <!-- 1 · ACTUALITÉS — bleu -->
+    <section class="block c-bleu" data-block="actualites">
+      <div class="block-head">
+        <div class="head-left"><h2>Actualités internes</h2></div>
+        <div class="head-right"><span class="pill">Rubrique</span><button class="btn-add-block" data-action="add-subblock">＋ Rubrique</button></div>
       </div>
       <div class="subblocks">
-        <div class="subblock" data-subblock>
-          <div class="subrow"><span class="label">Infos Direction & CODIR</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div>
-          <ul class="resources"></ul>
-        </div>
-        <div class="subblock" data-subblock>
-          <div class="subrow"><span class="label">Événements internes</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div>
-          <ul class="resources"></ul>
-        </div>
-        <div class="subblock" data-subblock>
-          <div class="subrow"><span class="label">Notes internes</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div>
-          <ul class="resources"></ul>
-        </div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Infos Direction & CODIR</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document — cliquez sur « + Document »</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Événements internes</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Notes internes</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
       </div>
     </section>
 
-    <!-- INSTITUTION & GOUVERNANCE -->
+    <!-- 2 · INSTITUTION — orange -->
     <section class="block c-orange" data-block="institution">
-      <div class="block-head" data-toggle="block">
-        <div class="head-text">
-          <h2>Institution & gouvernance</h2>
-          <div class="block-meta">CCN · RH · Réseau ARML/UNML</div>
-        </div>
-        <div class="head-actions">
-          <span class="pill">Rubrique</span>
-          <span class="toggle">▾</span>
-          <button class="btn add" data-action="add-subblock">＋</button>
-        </div>
-      </div>
-      <div class="block-summary">
-        <span class="stag">Projet associatif & gouvernance</span>
-        <span class="stag">CCN</span>
-        <span class="stag">RH</span>
-        <span class="stag">ARML & UNML</span>
+      <div class="block-head">
+        <div class="head-left"><h2>Institution & gouvernance</h2></div>
+        <div class="head-right"><span class="pill">Rubrique</span><button class="btn-add-block" data-action="add-subblock">＋ Rubrique</button></div>
       </div>
       <div class="subblocks">
-        <div class="subblock" data-subblock>
-          <div class="subrow"><span class="label">Projet associatif & gouvernance</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div>
-          <ul class="resources"></ul>
-        </div>
-        <div class="subblock" data-subblock>
-          <div class="subrow"><span class="label">Convention Collective (CCN)</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div>
-          <ul class="resources"></ul>
-        </div>
-        <div class="subblock" data-subblock>
-          <div class="subrow"><span class="label">Espace RH & vie du salarié</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div>
-          <ul class="resources"></ul>
-        </div>
-        <div class="subblock" data-subblock>
-          <div class="subrow"><span class="label">Réseau ARML & UNML</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div>
-          <ul class="resources"></ul>
-        </div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Projet associatif & gouvernance</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Convention Collective (CCN)</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Espace RH & vie du salarié</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Réseau ARML & UNML</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
       </div>
     </section>
 
-    <!-- ACCUEIL & ACCOMPAGNEMENT -->
-    <section class="block c-green" data-block="accueil">
-      <div class="block-head" data-toggle="block">
-        <div class="head-text">
-          <h2>Accueil & accompagnement</h2>
-          <div class="block-meta">Process cœur de métier</div>
-        </div>
-        <div class="head-actions">
-          <span class="pill">Process</span>
-          <span class="toggle">▾</span>
-          <button class="btn add" data-action="add-subblock">＋</button>
-        </div>
-      </div>
-      <div class="block-summary">
-        <span class="stag">Premier accueil</span>
-        <span class="stag">Diagnostic</span>
-        <span class="stag">Dispositifs</span>
-        <span class="stag">Ateliers collectifs</span>
+    <!-- 3 · ACCUEIL — vert -->
+    <section class="block c-vert" data-block="accueil">
+      <div class="block-head">
+        <div class="head-left"><h2>Accueil & accompagnement</h2></div>
+        <div class="head-right"><span class="pill">Process</span><button class="btn-add-block" data-action="add-subblock">＋ Rubrique</button></div>
       </div>
       <div class="subblocks">
-        <div class="subblock" data-subblock>
-          <div class="subrow"><span class="label">Process – Premier accueil</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div>
-          <ul class="resources"></ul>
-        </div>
-        <div class="subblock" data-subblock>
-          <div class="subrow"><span class="label">Process – Diagnostic</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div>
-          <ul class="resources"></ul>
-        </div>
-        <div class="subblock" data-subblock>
-          <div class="subrow"><span class="label">Process – Dispositifs</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div>
-          <ul class="resources"></ul>
-        </div>
-        <div class="subblock" data-subblock>
-          <div class="subrow"><span class="label">Process – Ateliers collectifs</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div>
-          <ul class="resources"></ul>
-        </div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Premier accueil</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Diagnostic</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Dispositifs</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Ateliers collectifs</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
       </div>
     </section>
 
-    <!-- RESSOURCES THÉMATIQUES -->
-    <section class="block c-purple" data-block="thematiques">
-      <div class="block-head" data-toggle="block">
-        <div class="head-text">
-          <h2>Ressources thématiques</h2>
-          <div class="block-meta">7 univers (calque site public) – contenus internes</div>
-        </div>
-        <div class="head-actions">
-          <span class="pill">Rubrique</span>
-          <span class="toggle">▾</span>
-          <button class="btn add" data-action="add-subblock">＋</button>
-        </div>
-      </div>
-      <div class="block-summary">
-        <span class="stag">Orientation</span>
-        <span class="stag">Emploi</span>
-        <span class="stag">Formation</span>
-        <span class="stag">Se déplacer</span>
-        <span class="stag">Démarches</span>
-        <span class="stag">Santé</span>
-        <span class="stag">Citoyenneté</span>
+    <!-- 4 · THÉMATIQUES — violet -->
+    <section class="block c-violet" data-block="thematiques">
+      <div class="block-head">
+        <div class="head-left"><h2>Ressources thématiques</h2></div>
+        <div class="head-right"><span class="pill">Rubrique</span><button class="btn-add-block" data-action="add-subblock">＋ Rubrique</button></div>
       </div>
       <div class="subblocks">
-        <div class="subblock" data-subblock><div class="subrow"><span class="label">Orientation</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul></div>
-        <div class="subblock" data-subblock><div class="subrow"><span class="label">Emploi</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul></div>
-        <div class="subblock" data-subblock><div class="subrow"><span class="label">Formation</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul></div>
-        <div class="subblock" data-subblock><div class="subrow"><span class="label">Se déplacer / Partir à l'étranger</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul></div>
-        <div class="subblock" data-subblock><div class="subrow"><span class="label">Démarches & vie quotidienne</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul></div>
-        <div class="subblock" data-subblock><div class="subrow"><span class="label">Santé</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul></div>
-        <div class="subblock" data-subblock><div class="subrow"><span class="label">Citoyenneté & numérique</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Orientation</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Emploi</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Formation</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Se déplacer / Partir à l'étranger</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Démarches & vie quotidienne</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Santé</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Citoyenneté & numérique</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
       </div>
     </section>
 
-    <!-- TERRITOIRES -->
-    <section class="block c-yellow" data-block="territoires">
-      <div class="block-head" data-toggle="block">
-        <div class="head-text">
-          <h2>Territoires</h2>
-          <div class="block-meta">BAB Nord · BAB Sud · Sud PB · PBI</div>
-        </div>
-        <div class="head-actions">
-          <span class="pill">Territoire</span>
-          <span class="toggle">▾</span>
-          <button class="btn add" data-action="add-subblock">＋</button>
-        </div>
-      </div>
-      <div class="block-summary">
-        <span class="stag">BAB Nord</span>
-        <span class="stag">BAB Sud</span>
-        <span class="stag">Sud Pays Basque</span>
-        <span class="stag">Pays Basque Intérieur</span>
+    <!-- 5 · TERRITOIRES — brique -->
+    <section class="block c-brique" data-block="territoires">
+      <div class="block-head">
+        <div class="head-left"><h2>Territoires</h2></div>
+        <div class="head-right"><span class="pill">Territoire</span><button class="btn-add-block" data-action="add-subblock">＋ Rubrique</button></div>
       </div>
       <div class="subblocks">
-        <div class="subblock" data-subblock><div class="subrow"><span class="label">BAB Nord</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul></div>
-        <div class="subblock" data-subblock><div class="subrow"><span class="label">BAB Sud</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul></div>
-        <div class="subblock" data-subblock><div class="subrow"><span class="label">Sud Pays Basque</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul></div>
-        <div class="subblock" data-subblock><div class="subrow"><span class="label">Pays Basque Intérieur</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">BAB Nord</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">BAB Sud</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Sud Pays Basque</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Pays Basque Intérieur</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
       </div>
     </section>
 
-    <!-- OUTILS QUOTIDIENS -->
-    <section class="block c-teal" data-block="outils">
-      <div class="block-head" data-toggle="block">
-        <div class="head-text">
-          <h2>Outils quotidiens</h2>
-          <div class="block-meta">Accès rapide aux outils de travail</div>
-        </div>
-        <div class="head-actions">
-          <span class="pill">Outil</span>
-          <span class="toggle">▾</span>
-          <button class="btn add" data-action="add-subblock">＋</button>
-        </div>
-      </div>
-      <div class="block-summary">
-        <span class="stag">i-Milo</span>
-        <span class="stag">linscription</span>
-        <span class="stag">Agenda partagé</span>
+    <!-- 6 · OUTILS — rose -->
+    <section class="block c-rose" data-block="outils">
+      <div class="block-head">
+        <div class="head-left"><h2>Outils quotidiens</h2></div>
+        <div class="head-right"><span class="pill">Outil</span><button class="btn-add-block" data-action="add-subblock">＋ Rubrique</button></div>
       </div>
       <div class="subblocks">
-        <div class="subblock" data-subblock><div class="subrow"><span class="label">i-Milo</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul></div>
-        <div class="subblock" data-subblock><div class="subrow"><span class="label">linscription</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul></div>
-        <div class="subblock" data-subblock><div class="subrow"><span class="label">Agenda partagé</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">i-Milo</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">linscription</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Agenda partagé</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
       </div>
     </section>
 
-    <!-- FORMATION & PROFESSIONNALISATION -->
-    <section class="block c-red" data-block="formationpro">
-      <div class="block-head" data-toggle="block">
-        <div class="head-text">
-          <h2>Formation & professionnalisation</h2>
-          <div class="block-meta">Montée en compétences & ressources</div>
-        </div>
-        <div class="head-actions">
-          <span class="pill">Rubrique</span>
-          <span class="toggle">▾</span>
-          <button class="btn add" data-action="add-subblock">＋</button>
-        </div>
-      </div>
-      <div class="block-summary">
-        <span class="stag">Formations internes</span>
-        <span class="stag">MOOCs & e-learning</span>
-        <span class="stag">Ressources pédagogiques</span>
+    <!-- 7 · FORMATION — teal -->
+    <section class="block c-teal" data-block="formationpro">
+      <div class="block-head">
+        <div class="head-left"><h2>Formation & professionnalisation</h2></div>
+        <div class="head-right"><span class="pill">Rubrique</span><button class="btn-add-block" data-action="add-subblock">＋ Rubrique</button></div>
       </div>
       <div class="subblocks">
-        <div class="subblock" data-subblock><div class="subrow"><span class="label">Formations internes</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul></div>
-        <div class="subblock" data-subblock><div class="subrow"><span class="label">MOOCs & e-learning</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul></div>
-        <div class="subblock" data-subblock><div class="subrow"><span class="label">Ressources pédagogiques</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Formations internes</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">MOOCs & e-learning</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Ressources pédagogiques</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
       </div>
     </section>
 
-    <!-- PROJETS STRUCTURANTS -->
-    <section class="block c-rose" data-block="projets">
-      <div class="block-head" data-toggle="block">
-        <div class="head-text">
-          <h2>Projets structurants</h2>
-          <div class="block-meta">ERIP · BETI LAN · Europe · Transfrontalier</div>
-        </div>
-        <div class="head-actions">
-          <span class="pill">Projet</span>
-          <span class="toggle">▾</span>
-          <button class="btn add" data-action="add-subblock">＋</button>
-        </div>
-      </div>
-      <div class="block-summary">
-        <span class="stag">ERIP</span>
-        <span class="stag">BETI LAN</span>
-        <span class="stag">Projets européens</span>
-        <span class="stag">Transfrontalier</span>
+    <!-- 8 · PROJETS — indigo -->
+    <section class="block c-indigo" data-block="projets">
+      <div class="block-head">
+        <div class="head-left"><h2>Projets structurants</h2></div>
+        <div class="head-right"><span class="pill">Projet</span><button class="btn-add-block" data-action="add-subblock">＋ Rubrique</button></div>
       </div>
       <div class="subblocks">
-        <div class="subblock" data-subblock><div class="subrow"><span class="label">ERIP</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul></div>
-        <div class="subblock" data-subblock><div class="subrow"><span class="label">BETI LAN</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul></div>
-        <div class="subblock" data-subblock><div class="subrow"><span class="label">Projets européens</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul></div>
-        <div class="subblock" data-subblock><div class="subrow"><span class="label">Transfrontalier</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">ERIP</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">BETI LAN</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Projets européens</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
+        <div class="subblock" data-subblock><div class="subrow"><span class="label">Transfrontalier</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"><li class="empty-res-item"><span class="empty-res">Aucun document.</span></li></ul></div>
       </div>
     </section>
 
   </div><!-- /grid -->
-</div><!-- /container -->
+</div><!-- /page-body -->
 
 <footer>© MISSION LOCALE PAYS BASQUE · INTRANET INTERNE · USAGE EXCLUSIVEMENT PROFESSIONNEL</footer>
 
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" role="dialog" aria-modal="true">
+    <h3 id="modal-title">Ajouter</h3>
+    <div id="modal-body"></div>
+    <div class="modal-actions">
+      <button class="btn-confirm" id="modal-confirm">Valider</button>
+      <button class="btn-cancel"  id="modal-cancel">Annuler</button>
+    </div>
+  </div>
+</div>
+<div id="toast"></div>
+
 <script>
-  document.addEventListener('click', e => {
-    const head = e.target.closest('[data-toggle="block"]');
-    if (!head || e.target.closest('button')) return;
-    head.closest('.block')?.classList.toggle('open');
-  });
+/* TOAST */
+function toast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = type === 'error' ? 'error show' : 'show';
+  clearTimeout(t._to); t._to = setTimeout(() => t.className = '', 2600);
+}
 
-  function makeSubblock(label) {
-    const d = document.createElement('div');
-    d.className = 'subblock'; d.setAttribute('data-subblock', '');
-    d.innerHTML = `<div class="subrow"><span class="label">${label}</span><span class="actions"><button class="btn add small" data-action="add-resource">＋</button><button class="btn del small" data-action="delete-subblock">×</button></span></div><ul class="resources"></ul>`;
-    return d;
+/* MODAL */
+function showModal({ title, fields, onConfirm }) {
+  const ov = document.getElementById('modal-overlay');
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-body').innerHTML = fields.map(f =>
+    `<label for="mf-${f.id}">${f.label}</label><input id="mf-${f.id}" type="text" placeholder="${f.placeholder||''}" autocomplete="off"/>`
+  ).join('');
+  ov.classList.add('open');
+  const first = document.getElementById('modal-body').querySelector('input');
+  if (first) setTimeout(() => first.focus(), 70);
+  const doOK = () => {
+    const v = {}; fields.forEach(f => { v[f.id] = document.getElementById('mf-'+f.id).value.trim(); });
+    if (fields.some(f => f.required !== false && !v[f.id])) { toast('Champ requis manquant.', 'error'); return; }
+    onConfirm(v); ov.classList.remove('open');
+  };
+  const doX = () => ov.classList.remove('open');
+  document.getElementById('modal-confirm').onclick = doOK;
+  document.getElementById('modal-cancel').onclick  = doX;
+  ov.onclick = e => { if (e.target === ov) doX(); };
+  document.getElementById('modal-body').onkeydown = e => { if (e.key === 'Enter') doOK(); };
+}
+
+/* DOM BUILDERS */
+function emptyPlaceholder() {
+  const li = document.createElement('li'); li.className = 'empty-res-item';
+  li.innerHTML = '<span class="empty-res">Aucun document — cliquez sur « + Document »</span>'; return li;
+}
+function makeRes(title, url) {
+  const li = document.createElement('li');
+  const isLink = url && url !== '#';
+  li.innerHTML = `<div class="res-link-wrap"><span class="res-icon">${isLink?'🔗':'📄'}</span><a href="${isLink?url:'#'}" ${isLink?'target="_blank" rel="noopener"':''} title="${title}">${title}</a></div><button class="res-del" data-action="delete-resource" title="Supprimer">×</button>`;
+  return li;
+}
+function makeSubblock(label) {
+  const d = document.createElement('div'); d.className = 'subblock'; d.setAttribute('data-subblock','');
+  d.innerHTML = `<div class="subrow"><span class="label">${label}</span><span class="sub-actions"><button class="btn-add-res" data-action="add-resource">＋ Document</button><button class="btn-del-sub" data-action="delete-subblock">× Suppr.</button></span></div><ul class="resources"></ul>`;
+  d.querySelector('.resources').appendChild(emptyPlaceholder()); return d;
+}
+function refreshEmpty(ul) {
+  const real = [...ul.querySelectorAll('li:not(.empty-res-item)')];
+  const ph = ul.querySelector('.empty-res-item');
+  if (real.length === 0) { if (!ph) ul.appendChild(emptyPlaceholder()); }
+  else { if (ph) ph.remove(); }
+}
+
+/* EVENTS */
+document.addEventListener('click', e => {
+  const btn = e.target.closest('button[data-action]');
+  if (!btn) return;
+  const a = btn.getAttribute('data-action');
+  const blk = btn.closest('.block');
+
+  if (a === 'add-subblock') {
+    showModal({ title: 'Nouvelle rubrique',
+      fields: [{id:'lbl', label:'Nom de la rubrique', placeholder:'ex. Procédures accueil…'}],
+      onConfirm: ({lbl}) => { blk.querySelector('.subblocks').appendChild(makeSubblock(lbl)); toast('Rubrique « '+lbl+' » ajoutée.'); }
+    });
   }
-
-  function makeResource(title, url) {
-    const li = document.createElement('li');
-    li.innerHTML = `<a href="${url?.trim()||'#'}" target="_blank" rel="noopener noreferrer">${title?.trim()||'Ressource'}</a><span class="actions"><button class="btn del small" data-action="delete-resource">×</button></span>`;
-    return li;
+  if (a === 'delete-subblock') {
+    const sub = btn.closest('[data-subblock]');
+    const name = sub?.querySelector('.label')?.textContent || 'cette rubrique';
+    if (confirm('Supprimer « '+name+' » et tous ses documents ?')) { sub?.remove(); toast('Rubrique supprimée.'); }
   }
+  if (a === 'add-resource') {
+    const sub = btn.closest('[data-subblock]');
+    showModal({ title: 'Ajouter un document',
+      fields: [
+        {id:'title', label:'Titre du document', placeholder:'ex. Fiche procédure, Guide PDF…'},
+        {id:'url',   label:'URL (optionnel)',    placeholder:'https://…', required: false}
+      ],
+      onConfirm: ({title, url}) => {
+        const ul = sub.querySelector('.resources');
+        ul.appendChild(makeRes(title, url||'#')); refreshEmpty(ul);
+        toast('Document « '+title+' » ajouté.');
+      }
+    });
+  }
+  if (a === 'delete-resource') {
+    const li = btn.closest('li'); const ul = li?.closest('.resources');
+    li?.remove(); if (ul) refreshEmpty(ul); toast('Document supprimé.');
+  }
+});
 
-  document.addEventListener('click', e => {
-    const btn = e.target.closest('button[data-action]');
-    if (!btn) return;
-    const a = btn.getAttribute('data-action');
-    if (a === 'add-subblock') {
-      const b = btn.closest('.block');
-      const l = prompt('Nom de la nouvelle rubrique :');
-      if (!l?.trim()) return;
-      b.querySelector('.subblocks').appendChild(makeSubblock(l.trim()));
-      b.classList.add('open');
-    }
-    if (a === 'delete-subblock') { const s = btn.closest('[data-subblock]'); if (confirm('Supprimer cette rubrique ?')) s?.remove(); }
-    if (a === 'add-resource') {
-      const s = btn.closest('[data-subblock]');
-      const t = prompt('Titre de la ressource (ex. Procédure PDF, Lien, Modèle...) :');
-      if (!t?.trim()) return;
-      const u = prompt('Lien URL (ou laisser vide si non disponible) :') || '#';
-      s.querySelector('.resources').appendChild(makeResource(t.trim(), u));
-    }
-    if (a === 'delete-resource') btn.closest('li')?.remove();
+/* SAVE / RESTORE */
+const KEY = 'mlpb_intranet_v3';
+
+function serialize() {
+  const state = {};
+  document.querySelectorAll('.block[data-block]').forEach(blk => {
+    const id = blk.getAttribute('data-block');
+    state[id] = [...blk.querySelectorAll('[data-subblock]')].map(sub => ({
+      label: sub.querySelector('.label')?.textContent?.trim() || '',
+      resources: [...sub.querySelectorAll('.resources li:not(.empty-res-item)')].map(li => ({
+        title: li.querySelector('a')?.textContent?.trim() || '',
+        url: li.querySelector('a')?.getAttribute('href') || '#'
+      }))
+    }));
   });
+  return state;
+}
+
+function restore(state) {
+  Object.entries(state).forEach(([id, subs]) => {
+    const blk = document.querySelector(`.block[data-block="${id}"]`);
+    if (!blk) return;
+    const container = blk.querySelector('.subblocks');
+    container.querySelectorAll('[data-subblock]').forEach(s => s.remove());
+    subs.forEach(({label, resources}) => {
+      const sub = makeSubblock(label);
+      const ul = sub.querySelector('.resources');
+      resources.forEach(({title, url}) => ul.appendChild(makeRes(title, url)));
+      refreshEmpty(ul); container.appendChild(sub);
+    });
+  });
+}
+
+document.getElementById('btn-save').addEventListener('click', () => {
+  try { localStorage.setItem(KEY, JSON.stringify(serialize())); toast('✔ Données sauvegardées.'); }
+  catch(e) { toast('Erreur sauvegarde.', 'error'); }
+});
+document.getElementById('btn-reset').addEventListener('click', () => {
+  if (confirm('Réinitialiser toutes les données sauvegardées ?')) {
+    localStorage.removeItem(KEY); toast('Réinitialisé. Rechargez la page.');
+  }
+});
+(function init() {
+  try { const raw = localStorage.getItem(KEY); if (raw) restore(JSON.parse(raw)); } catch(e) {}
+})();
 </script>
 </body>
 </html>
